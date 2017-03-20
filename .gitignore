@@ -10,6 +10,15 @@ bootstrap/cache/
 .env.*.php
 .env.php
 .env
+/public/storage
+/public/hot
+/storage/*.key
+/.idea
+Homestead.json
+Homestead.yaml
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
+
+# Mac
+.DS_Store
