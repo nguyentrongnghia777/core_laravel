@@ -5,14 +5,15 @@
  * https://github.com/laravel/framework/blob/5.3/src/Illuminate/Auth/Console/stubs/make/controllers/HomeController.stub
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 /**
  * Class HomeController
- * @package App\Http\Controllers
+ * @package App\Http\Controllers\Admin
  */
 class HomeController extends Controller
 {
@@ -23,7 +24,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -33,6 +34,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('adminlte::home');
+        return view('vendor.adminlte.home');
     }
 }
