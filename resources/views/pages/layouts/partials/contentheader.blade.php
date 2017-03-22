@@ -6,18 +6,14 @@
             <a href="">Vietnamese</a>
             <a href="">English</a>
         </p>
-        <p> 
-            <?php 
-                echo '<pre>';
-                    var_dump(BaseUser::check_admin(Auth::user()->id));
-                // var_dump(Auth::user());
-                echo '</pre>';                
-            ?>
+        <p>
             @if (Auth::guest())
                 <a href="{{ url('/login') }}">Đăng Nhập</a>
             @else
                 <a href="">Xin Chào {{ Auth::user()->name }}</a>
-                 | <a href="">Trang Quản Trị Admin</a> 
+                @if ($can_mange)
+                 | <a href="">Trang Quản Trị Admin</a>
+                @endif
                  | <a href="{{ url('/logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">Đăng Xuất</a>
                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

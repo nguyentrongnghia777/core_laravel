@@ -234,11 +234,6 @@ return [
          * Acacha AdminLTE template alias
          */
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
-
-        /*
-         * Acacha AdminLTE template alias
-         */
-        'BaseUser' => App\Http\Models\Business\User::class,        
     ],
 
 ];
