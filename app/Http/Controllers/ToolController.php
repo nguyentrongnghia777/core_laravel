@@ -44,5 +44,6 @@ class ToolController extends Controller
             var_dump($posts);
         echo '</pre>';
         // echo $posts->links();
+        return view('pages.home.home');
     }
 }
