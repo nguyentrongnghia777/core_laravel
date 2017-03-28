@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Models\Business\User;
+use App\Http\Models\Business\UserModel;
 
 class Admin
 {
@@ -18,7 +18,7 @@ class Admin
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (!User::check_admin(Auth::id())) {
+        if (!UserModel::check_admin(Auth::id())) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {

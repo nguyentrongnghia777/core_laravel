@@ -12,7 +12,7 @@
             @else
                 <a href="">Xin Chào {{ Auth::user()->name }}</a>
                 @if ($can_mange)
-                 | <a href="">Trang Quản Trị Admin</a>
+                 | <a href="{{ url('/admincp') }}">Trang Quản Trị Admin</a>
                 @endif
                  | <a href="{{ url('/logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">Đăng Xuất</a>

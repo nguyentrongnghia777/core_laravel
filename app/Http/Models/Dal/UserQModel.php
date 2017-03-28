@@ -2,11 +2,11 @@
 
 namespace App\Http\Models\Dal;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Helpers\Constants;
 
-class UserQ extends Authenticatable
+class UserQModel extends Model
 {
     /**
      * get role user by id

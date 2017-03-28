@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
-use App\Http\Models\Business\Post;
+use App\Http\Models\Business\PostModel;
 use App\Http\Helpers\Constant;
-use App\Http\Models\Dal\PostQ;
+use App\Http\Models\Dal\PostQModel;
 
 class ToolController extends Controller
 {
@@ -21,7 +21,7 @@ class ToolController extends Controller
         // var_dump($data);
         echo Constant::ROLES_ADMIN;
 
-        $posts = Post::all();
+        $posts = PostModel::all();
         echo '<pre>';
             var_dump($posts);
         echo '</pre>';
@@ -39,7 +39,7 @@ class ToolController extends Controller
         // echo '<pre>';
         //     var_dump($posts);
         // echo '</pre>';
-        $posts = PostQ::get_posts_paging();
+        $posts = PostQModel::get_posts_paging();
         echo '<pre>';
             var_dump($posts);
         echo '</pre>';
