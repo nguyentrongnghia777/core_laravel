@@ -46,4 +46,20 @@ class ToolController extends Controller
         // echo $posts->links();
         return view('pages.home.home');
     }
+
+    public function demo_debug() {
+        // document https://github.com/barryvdh/laravel-debugbar
+        
+        // Debugbar::info($object);
+        // Debugbar::error('Error!');
+        // Debugbar::warning('Watch out…');
+        // Debugbar::addMessage('Another message', 'mylabel');
+
+        // Debugbar::startMeasure('render','Time for rendering');
+        // Debugbar::stopMeasure('render');
+        // Debugbar::addMeasure('now', LARAVEL_START, microtime(true));
+        // Debugbar::measure('My long operation', function() {
+        //     // Do something…
+        // });
+    }
 }
