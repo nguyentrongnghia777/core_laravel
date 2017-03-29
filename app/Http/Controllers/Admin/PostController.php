@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Models\Dal\PostCModel;
 
 /**
@@ -56,10 +57,12 @@ class PostController extends Controller
 
         //Get request data
         $request_data = $_POST;
+        $user_id = Auth::user()->id;
+        // dd($user_id);
 
         //Create needed array to store to DB
         $blog_content = [
-            'user_id' => 1,
+            'user_id' => $user_id,
             'name' => $request_data['title']
         ];
         // dd($request_data);
@@ -70,10 +73,10 @@ class PostController extends Controller
         // $blog_content = Input::all();
         
         if (PostCModel::insertBlog($blog_content)) {
-            $request->session()->flash('alert-success', 'Blog đã được tạo thành công!');
+            $request->session()->flash('alert-success', 'Bài viết đã được tạo thành công!');
             return back();
         } else {
-            $request->session()->flash('alert-danger', 'Blog tạo không thành công!');
+            $request->session()->flash('alert-danger', 'Bài viết tạo không thành công!');
         }
     }
 }
