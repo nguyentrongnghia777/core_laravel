@@ -20,6 +20,12 @@ Route::get('/tool/demo_paging', 'ToolController@demo_paging');
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/admincp', 'Admin\HomeController@index');
+        Route::get('/list-post', 'Admin\PostController@index');
+        Route::get('/create-post', function () {
+		    return view('vendor/adminlte/post/create');
+		});
+        // Route::get('/create-post', 'Admin\PostController@create');
+      	Route::post('/store-post', 'Admin\PostController@store');
     });
 });
 
