@@ -101,6 +101,11 @@ class PostController extends Controller
      */
     public function update($post_id, Request $request)
     {
+        // Validate and store the blog post...
+        $this->validate($request, [
+            'title' => 'required|min:3',
+        ]);
+
         // return $post_id;
         // Get request data
         $request_data = $_POST;
@@ -118,6 +123,7 @@ class PostController extends Controller
             return back();
         } else {
             $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
+            return back();
         }
     }
 
@@ -134,6 +140,7 @@ class PostController extends Controller
             return back();
         } else {
             $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
+            return back();
         }
     }
 }
