@@ -38,7 +38,7 @@ class PostController extends Controller
     public function index()
     {
         //Get Blogs
-        $posts = PostQModel::get_posts_paging();
+        $posts = PostQModel::get_posts();
         // dd($posts);
         return view('vendor.adminlte.post.list', compact('posts'));
     }

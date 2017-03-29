@@ -9,6 +9,17 @@ use App\Http\Helpers\Constants;
 class PostQModel extends Model
 {
     /**
+     * get posts
+     * @return posts
+     */
+    public static function get_posts() {
+        return DB::table(Constants::POSTS . ' as p')
+                ->select('p.*', 'u.name as user_name', 'u.email as user_email')
+                ->join(Constants::USERS . ' as u', 'p.user_id', '=', 'u.id')
+                ->get();
+    }
+
+    /**
      * get posts paging
      * @return object Illuminate\Pagination\LengthAwarePaginator
      */
@@ -16,6 +27,6 @@ class PostQModel extends Model
         return DB::table(Constants::POSTS . ' as p')
                 ->select('p.*', 'u.name as user_name', 'u.email as user_email')
                 ->join(Constants::USERS . ' as u', 'p.user_id', '=', 'u.id')
-                ->get();
+                ->paginate(2);
     }    
 }
