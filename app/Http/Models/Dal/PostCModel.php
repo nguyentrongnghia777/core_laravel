@@ -11,9 +11,18 @@ class PostCModel extends Model
 	/**
      * insert post
      * @param blog_content
-     * @return true oor false
+     * @return true or false
      */
-    public static function insertBlog($blog_content) {
-        return DB::table(Constants::POSTS)->insert([$blog_content]);
+    public static function insert_post($post_content) {
+        return DB::table(Constants::POSTS)->insert([$post_content]);
+    }
+
+    /**
+     * delete post
+     * @param post id
+     * @return true or false
+     */
+    public static function delete_post($post_id) {
+        return DB::table(Constants::POSTS)->where('id', '=', $post_id)->delete();
     }
 }

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Models\Dal\PostCModel;
+use App\Http\Models\Dal\PostQModel;
 
 /**
  * Class PostController
@@ -36,7 +37,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('vendor.adminlte.post.list');
+        //Get Blogs
+        $posts = PostQModel::get_posts_paging();
+        // dd($posts);
+        return view('vendor.adminlte.post.list', compact('posts'));
     }
 
     /**
@@ -61,22 +65,44 @@ class PostController extends Controller
         // dd($user_id);
 
         //Create needed array to store to DB
-        $blog_content = [
+        $post_content = [
             'user_id' => $user_id,
             'name' => $request_data['title']
         ];
         // dd($request_data);
-        // dd($blog_content);
-        // $blog = new BlogC;
-        // $title = Input::get('title');
-        // $body = Input::get('body');
-        // $blog_content = Input::all();
         
-        if (PostCModel::insertBlog($blog_content)) {
+        if (PostCModel::insert_post($post_content)) {
             $request->session()->flash('alert-success', 'Bài viết đã được tạo thành công!');
             return back();
         } else {
             $request->session()->flash('alert-danger', 'Bài viết tạo không thành công!');
+        }
+    }
+
+    /**
+     * Edit a blog post.
+     *
+     * @param  post id
+     * @return Response
+     */
+    public function edit($post_id)
+    {
+        return $post_id;
+    }
+
+    /**
+     * Delete a blog post.
+     *
+     * @param  post id
+     * @return Response
+     */
+    public function delete($post_id, Request $request)
+    {
+        if (PostCModel::delete_post($post_id)) {
+            $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
+            return back();
+        } else {
+            $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
         }
     }
 }
