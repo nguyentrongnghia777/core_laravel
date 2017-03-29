@@ -37,7 +37,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //Get Blogs
+        //Get Posts
         $posts = PostQModel::get_posts();
         // dd($posts);
         return view('vendor.adminlte.post.list', compact('posts'));
@@ -87,7 +87,38 @@ class PostController extends Controller
      */
     public function edit($post_id)
     {
-        return $post_id;
+        //Get Post
+        $post = PostQModel::get_post_by_id($post_id);
+        // dd($post);
+        return view('vendor.adminlte.post.edit', compact('post'));
+    }
+
+    /**
+     * Update a blog post.
+     *
+     * @param  post id
+     * @return Response
+     */
+    public function update($post_id, Request $request)
+    {
+        // return $post_id;
+        // Get request data
+        $request_data = $_POST;
+        $user_id = Auth::user()->id;
+
+        //Create needed array to update to DB
+        $post_content = [
+            'user_id' => $user_id,
+            'name' => $request_data['title']
+        ];
+        // dd($post_content);
+
+        if (PostCModel::update_post($post_id, $post_content)) {
+            $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
+            return back();
+        } else {
+            $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
+        }
     }
 
     /**

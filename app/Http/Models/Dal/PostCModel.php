@@ -18,6 +18,17 @@ class PostCModel extends Model
     }
 
     /**
+     * update post
+     * @param post id
+     * @return true or false
+     */
+    public static function update_post($post_id, $post_content) {
+        return DB::table(Constants::POSTS)
+            	->where('id', $post_id)
+            	->update($post_content);
+    }
+
+    /**
      * delete post
      * @param post id
      * @return true or false
