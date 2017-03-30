@@ -114,6 +114,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes'           => [
+        'post-name' => 'Post name',
+    ],
 
 ];

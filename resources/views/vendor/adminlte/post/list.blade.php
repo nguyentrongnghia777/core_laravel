@@ -5,18 +5,16 @@
 
 @section('main-content')
 <div class="container-fluid spark-screen">
-    <div class="row">
-        <div class="flash-message">
+
+    <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if(Session::has('alert-' . $msg))
             <?php //var_dump(session()->all()); ?>
-            <h2 class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}  <button class="close" data-dismiss="alert" aria-label="close">&times;</button>
-            </h2>
-
+            <h4 class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}  <button class="close" data-dismiss="alert" aria-label="close">&times;</button></h4>
             @endif
         @endforeach
-        </div> <!-- end .flash-message -->
-    </div>
+    </div> <!-- end .flash-message -->
+
     <div class="row">
         <div class="col-md-12">
             <!-- Default box -->
@@ -70,8 +68,8 @@
                                         <tr role="row" class="{{ $i % 2 == 0 ? 'odd' : 'even' }}">
                                             <td class="sorting_1">{{ $post->name }}</td>
                                             <td class="">
-                                                <a href="{{ url('edit-post/'.$post->id) }}" class="btn-edit">Sửa</a> | 
-                                                <a href="{{ url('delete-post/'.$post->id) }}" class="btn-delete">Xóa</a>
+                                                <a href="{{ url('/post/edit/'.$post->id) }}" class="btn-edit">Sửa</a> | 
+                                                <a href="{{ url('/post/delete/'.$post->id) }}" class="btn-delete">Xóa</a>
                                             </td>
                                         </tr>
                                         @endforeach

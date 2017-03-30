@@ -20,12 +20,12 @@ Route::get('/tool/demo_paging', 'ToolController@demo_paging');
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/admincp', 'Admin\HomeController@index');
-        Route::get('/list-post', 'Admin\PostController@index');
-        Route::get('/create-post', 'Admin\PostController@create');
-        Route::post('/store-post', 'Admin\PostController@store');
-        Route::get('/edit-post/{id}', 'Admin\PostController@edit');
-        Route::post('/edit-post/{id}', 'Admin\PostController@update');
-        Route::get('/delete-post/{id}', 'Admin\PostController@delete');
+        Route::get('/post', 'Admin\PostController@index');
+        Route::get('/post/create', 'Admin\PostController@create');
+        Route::post('/post/store', 'Admin\PostController@store');
+        Route::get('/post/edit/{id}', 'Admin\PostController@edit');
+        Route::post('/post/update/{id}', 'Admin\PostController@update');
+        Route::get('/post/delete/{id}', 'Admin\PostController@delete');
     });
 });
 

@@ -56,32 +56,23 @@ class PostController extends Controller
     /**
      * Store a new blog post.
      *
-     * @param  Request  $request
+     * @param Request $request
      * @return Response
      */
     public function store(Request $request)
     {
         // Validate and store the blog post...
         $this->validate($request, [
-            'title' => 'required|min:3',
+            'post-name' => 'bail|required|min:3',
         ]);
 
-
-        // The blog post is valid, store in database...
-
-        //Get request data
-        $request_data = $_POST;
-        $user_id = Auth::user()->id;
-        // dd($user_id);
-
-        //Create needed array to store to DB
-        $post_content = [
-            'user_id' => $user_id,
-            'name' => $request_data['title']
+        // Create item to insert db
+        $post = [
+            'user_id' => Auth::id(),
+            'name' => $_POST['post-name'],
         ];
-        // dd($request_data);
         
-        if (PostCModel::insert_post($post_content)) {
+        if (PostCModel::insert_post($post)) {
             $request->session()->flash('alert-success', 'Bài viết đã được tạo thành công!');
             return back();
         } else {
@@ -99,6 +90,7 @@ class PostController extends Controller
     {
         //Get Post
         $post = PostQModel::get_post_by_id($post_id);
+
         // dd($post);
         if (count($post)) {
             return view('vendor.adminlte.post.edit', compact('post'));
@@ -109,27 +101,22 @@ class PostController extends Controller
     /**
      * Update a blog post.
      *
-     * @param  post id
+     * @param  post_id
      * @return Response
      */
     public function update($post_id, Request $request)
     {
         // Validate and store the blog post...
         $this->validate($request, [
-            'title' => 'required|min:3',
+            'post-name' => 'required|min:3',
         ]);
 
-        // return $post_id;
-        // Get request data
-        $request_data = $_POST;
-
-        //Create needed array to update to DB
-        $post_content = [
-            'name' => $request_data['title']
+        // Create needed array to update to DB
+        $post = [
+            'name' => $_POST['post-name']
         ];
-        // dd($post_content);
 
-        if (PostCModel::update_post($post_id, $post_content)) {
+        if (PostCModel::update_post($post_id, $post)) {
             $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
             return back();
         } else {
@@ -152,5 +139,18 @@ class PostController extends Controller
         } else {
             return view('vendor.adminlte.errors.404');
         }
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return  array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'A title is required',
+            'body.required'  => 'A message is required',
+        ];
     }
 }
