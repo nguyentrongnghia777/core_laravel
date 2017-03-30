@@ -5,18 +5,18 @@
 
 @section('main-content')
 <div class="container-fluid spark-screen">
-	<div class="row">
-		<div class="flash-message">
-	    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-			@if(Session::has('alert-' . $msg))
-			<?php //var_dump(session()->all()); ?>
-			<h2 class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} 	<button class="close" data-dismiss="alert" aria-label="close">&times;</button>
-			</h2>
+    <div class="row">
+        <div class="flash-message">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has('alert-' . $msg))
+            <?php //var_dump(session()->all()); ?>
+            <h2 class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}  <button class="close" data-dismiss="alert" aria-label="close">&times;</button>
+            </h2>
 
-			@endif
-	    @endforeach
-	  	</div> <!-- end .flash-message -->
-	</div>
+            @endif
+        @endforeach
+        </div> <!-- end .flash-message -->
+    </div>
     <div class="row">
         <div class="col-md-12">
             <!-- Default box -->
@@ -64,14 +64,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<?php $i = 1; ?>
-                                    	@foreach ($posts as $post)
-										<?php $i++; ?>
+                                        <?php $i = 1; ?>
+                                        @foreach ($posts as $post)
+                                        <?php $i++; ?>
                                         <tr role="row" class="{{ $i % 2 == 0 ? 'odd' : 'even' }}">
                                             <td class="sorting_1">{{ $post->name }}</td>
                                             <td class="">
-                                            	<a href="edit-post/{{ $post->id }}">Sửa</a> | 
-                                            	<a href="delete-post/{{ $post->id }}">Xóa</a>
+                                                <a href="{{ url('edit-post/'.$post->id) }}" class="btn-edit">Sửa</a> | 
+                                                <a href="{{ url('delete-post/'.$post->id) }}" class="btn-delete">Xóa</a>
                                             </td>
                                         </tr>
                                         @endforeach
