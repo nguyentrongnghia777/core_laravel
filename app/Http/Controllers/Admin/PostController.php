@@ -44,6 +44,16 @@ class PostController extends Controller
     }
 
     /**
+     * Show form crate post.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        return view('vendor/adminlte/post/create');
+    }
+
+    /**
      * Store a new blog post.
      *
      * @param  Request  $request
@@ -90,7 +100,10 @@ class PostController extends Controller
         //Get Post
         $post = PostQModel::get_post_by_id($post_id);
         // dd($post);
-        return view('vendor.adminlte.post.edit', compact('post'));
+        if (count($post)) {
+            return view('vendor.adminlte.post.edit', compact('post'));
+        }
+        return view('vendor.adminlte.errors.404');
     }
 
     /**
@@ -109,11 +122,9 @@ class PostController extends Controller
         // return $post_id;
         // Get request data
         $request_data = $_POST;
-        $user_id = Auth::user()->id;
 
         //Create needed array to update to DB
         $post_content = [
-            'user_id' => $user_id,
             'name' => $request_data['title']
         ];
         // dd($post_content);
@@ -139,8 +150,7 @@ class PostController extends Controller
             $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
             return back();
         } else {
-            $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
-            return back();
+            return view('vendor.adminlte.errors.404');
         }
     }
 }
