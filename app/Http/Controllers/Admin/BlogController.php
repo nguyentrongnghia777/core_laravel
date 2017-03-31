@@ -39,10 +39,8 @@ class BlogController extends Controller
     {
         //Get Blogs
         $blogs = BlogQModel::get_blogs_paging();
-        //Get total number blogs
-        $total_blogs = BlogQModel::get_total_number_blogs();
         // dd($blogs);
-        return view('vendor.adminlte.blog.list', compact('blogs', 'total_blogs'));
+        return view('vendor.adminlte.blog.list', compact('blogs'));
     }
 
     /**

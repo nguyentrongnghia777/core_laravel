@@ -1,9 +1,10 @@
 /* ==========================================================================
    Nguyen Trong Nghia
    ========================================================================== */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
 
-html, body {
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+html,
+body {
     overflow-x: hidden;
 }
 
@@ -15,30 +16,45 @@ body {
     margin: 0px;
     padding: 0px;
 }
+
 form {
     margin: 0
 }
+
 a {
-	color: #333; 
+    color: #333;
     cursor: pointer
 }
-a, a:focus {
+
+a,
+a:focus {
     outline: none;
     text-decoration: none;
 }
+
 a:hover {
     text-decoration: none;
     color: #0076a1;
 }
-input, input:focus {
+
+input,
+input:focus {
     outline: none
 }
+
 #container .container {
     max-width: 960px;
     height: auto;
 }
-body,h1,h2,h3,h4,p,a {
-	font-family: 'Open Sans', sans-serif;
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+a {
+    font-family: 'Open Sans', sans-serif;
 }
 
 #infoMessage {
@@ -46,36 +62,55 @@ body,h1,h2,h3,h4,p,a {
 }
 
 .language a.active {
-	color: red;
+    color: red;
 }
 
- /* ==========================================================================
+.btn-edit,
+.btn-delete {
+    padding: 0 9px;
+    margin: 10px 0px 0px 10px;
+    min-width: 50px;
+    height: 30px;
+}
+
+.btn-edit {
+    background-image: url("../../img/pencil.png");
+    background-repeat: no-repeat;
+}
+
+.btn-delete {
+    background-image: url("../../img/delete.png");
+    background-repeat: no-repeat;
+}
+
+#example1_filter {
+    margin-bottom: 15px;
+}
+
+
+/* ==========================================================================
    Responsive CSS Landscape Tablet
    ========================================================================== */
-@media only screen and (min-width: 960px) and (max-width: 1240px) {
 
-}
+@media only screen and (min-width: 960px) and (max-width: 1240px) {}
 
 
 /* ==========================================================================
    Responsive CSS Portrait Tablet
    ========================================================================== */
-@media only screen and (min-width: 768px) and (max-width: 959px) {
 
-}
+@media only screen and (min-width: 768px) and (max-width: 959px) {}
 
 
 /* ==========================================================================
    Responsive CSS Landscape Mobile
    ========================================================================== */
-@media only screen and (min-width: 480px) and (max-width: 767px) {
 
-}
+@media only screen and (min-width: 480px) and (max-width: 767px) {}
 
 
 /* ==========================================================================
    Responsive CSS Portrait Mobile
    ========================================================================== */
-@media only screen and (min-width: 100px) and (max-width: 479px) {
 
-}
+@media only screen and (min-width: 100px) and (max-width: 479px) {}
