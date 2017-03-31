@@ -38,9 +38,11 @@ class PostController extends Controller
     public function index()
     {
         //Get Posts
-        $posts = PostQModel::get_posts();
+        $posts = PostQModel::get_posts_paging();
+        //Get total number posts
+        $total_posts = PostQModel::get_total_number_posts();
         // dd($posts);
-        return view('vendor.adminlte.post.list', compact('posts'));
+        return view('vendor.adminlte.post.list', compact('posts', 'total_posts'));
     }
 
     /**
@@ -77,6 +79,7 @@ class PostController extends Controller
             return back();
         } else {
             $request->session()->flash('alert-danger', 'Bài viết tạo không thành công!');
+            return back();
         }
     }
 
@@ -136,9 +139,8 @@ class PostController extends Controller
         if (PostCModel::delete_post($post_id)) {
             $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
             return back();
-        } else {
-            return view('vendor.adminlte.errors.404');
         }
+        return view('vendor.adminlte.errors.404');
     }
 
     /**
