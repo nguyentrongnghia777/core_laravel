@@ -17,7 +17,7 @@ class CommentsTableSeeder extends Seeder
             array_push($data, [
                 'content' => 'hay hay hay' . ' - ' . $i,
                 'user_id' => 1,
-                'post_id' => 2,
+                'blog_id' => 2,
             ]);
         }
 
