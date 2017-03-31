@@ -8,7 +8,7 @@ use App\Http\Helpers\Constants;
 
 class PostCModel extends Model
 {
-	/**
+    /**
      * insert post
      * @param blog_content
      * @return true or false
@@ -24,8 +24,8 @@ class PostCModel extends Model
      */
     public static function update_post($post_id, $post_content) {
         return DB::table(Constants::POSTS)
-            	->where('id', $post_id)
-            	->update($post_content);
+                ->where('id', $post_id)
+                ->update($post_content);
     }
 
     /**
