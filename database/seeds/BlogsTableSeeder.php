@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PostsTableSeeder extends Seeder
+class BlogsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,6 +20,6 @@ class PostsTableSeeder extends Seeder
             ]);
         }
 
-        DB::table('posts')->insert($data);   
+        DB::table('blogs')->insert($data);   
     }
 }

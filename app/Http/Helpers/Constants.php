@@ -7,7 +7,7 @@ Class Constants {
 	const USERS = 'users';
 	const USERS_GROUPS = 'users_groups';
 	const GROUPS = 'groups';
-	const POSTS = 'posts';
+	const BLOGS = 'blogs';
 
 	// user role
     const ROLES_ADMIN = 'admin';

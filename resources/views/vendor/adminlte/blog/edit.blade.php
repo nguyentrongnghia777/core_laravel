@@ -34,12 +34,12 @@
                                 </ul>
                             </div>
                         @endif
-                        <form role="form" method="POST" action="{{ url('post/update/'. $post[0]->id) }}">
+                        <form role="form" method="POST" action="{{ url('blog/update/'. $blog[0]->id) }}">
                             {{ csrf_field() }}
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Tên bài viết</label>
-                                <input type="text" class="form-control" placeholder="Tên bài viết ..." name="post-name" value="{{ $post[0]->name }}">
+                                <input type="text" class="form-control" placeholder="Tên bài viết ..." name="blog-name" value="{{ $blog[0]->name }}">
                             </div>
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Lưu</button>

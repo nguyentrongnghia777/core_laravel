@@ -11,14 +11,14 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Models\Dal\PostCModel;
-use App\Http\Models\Dal\PostQModel;
+use App\Http\Models\Dal\BlogCModel;
+use App\Http\Models\Dal\BlogQModel;
 
 /**
- * Class PostController
+ * Class BlogController
  * @package App\Http\Controllers\Admin
  */
-class PostController extends Controller
+class BlogController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -31,50 +31,50 @@ class PostController extends Controller
     }
 
     /**
-     * Show list blog posts.
+     * Show list blogs.
      *
      * @return Response
      */
     public function index()
     {
-        //Get Posts
-        $posts = PostQModel::get_posts_paging();
-        //Get total number posts
-        $total_posts = PostQModel::get_total_number_posts();
-        // dd($posts);
-        return view('vendor.adminlte.post.list', compact('posts', 'total_posts'));
+        //Get Blogs
+        $blogs = BlogQModel::get_blogs_paging();
+        //Get total number blogs
+        $total_blogs = BlogQModel::get_total_number_blogs();
+        // dd($blogs);
+        return view('vendor.adminlte.blog.list', compact('blogs', 'total_blogs'));
     }
 
     /**
-     * Show form crate post.
+     * Show form create blog.
      *
      * @return Response
      */
     public function create()
     {
-        return view('vendor/adminlte/post/create');
+        return view('vendor/adminlte/blog/create');
     }
 
     /**
-     * Store a new blog post.
+     * Store a new blog.
      *
      * @param Request $request
      * @return Response
      */
     public function store(Request $request)
     {
-        // Validate and store the blog post...
+        // Validate and store the blog...
         $this->validate($request, [
-            'post-name' => 'bail|required|min:3',
+            'blog-name' => 'bail|required|min:3',
         ]);
 
         // Create item to insert db
-        $post = [
+        $blog = [
             'user_id' => Auth::id(),
-            'name' => $_POST['post-name'],
+            'name' => $_POST['blog-name'],
         ];
         
-        if (PostCModel::insert_post($post)) {
+        if (BlogCModel::insert_blog($blog)) {
             $request->session()->flash('alert-success', 'Bài viết đã được tạo thành công!');
             return back();
         } else {
@@ -84,42 +84,42 @@ class PostController extends Controller
     }
 
     /**
-     * Edit a blog post.
+     * Edit a blog blog.
      *
-     * @param  post id
+     * @param  blog id
      * @return Response
      */
-    public function edit($post_id)
+    public function edit($blog_id)
     {
-        //Get Post
-        $post = PostQModel::get_post_by_id($post_id);
+        //Get Blog
+        $blog = BlogQModel::get_blog_by_id($blog_id);
 
-        // dd($post);
-        if (count($post)) {
-            return view('vendor.adminlte.post.edit', compact('post'));
+        // dd($blog);
+        if (count($blog)) {
+            return view('vendor.adminlte.blog.edit', compact('blog'));
         }
         return view('vendor.adminlte.errors.404');
     }
 
     /**
-     * Update a blog post.
+     * Update a blog.
      *
-     * @param  post_id
+     * @param  blog_id
      * @return Response
      */
-    public function update($post_id, Request $request)
+    public function update($blog_id, Request $request)
     {
-        // Validate and store the blog post...
+        // Validate and store the blog...
         $this->validate($request, [
-            'post-name' => 'required|min:3',
+            'blog-name' => 'required|min:3',
         ]);
 
         // Create needed array to update to DB
-        $post = [
-            'name' => $_POST['post-name']
+        $blog = [
+            'name' => $_POST['blog-name']
         ];
 
-        if (PostCModel::update_post($post_id, $post)) {
+        if (BlogCModel::update_blog($blog_id, $blog)) {
             $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
             return back();
         } else {
@@ -129,14 +129,14 @@ class PostController extends Controller
     }
 
     /**
-     * Delete a blog post.
+     * Delete a blog blog.
      *
-     * @param  post id
+     * @param  blog id
      * @return Response
      */
-    public function delete($post_id, Request $request)
+    public function delete($blog_id, Request $request)
     {
-        if (PostCModel::delete_post($post_id)) {
+        if (BlogCModel::delete_blog($blog_id)) {
             $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
             return back();
         }

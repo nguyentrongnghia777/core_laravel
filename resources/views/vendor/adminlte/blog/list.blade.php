@@ -63,13 +63,13 @@
                                     </thead>
                                     <tbody>
                                         <?php $i = 1; ?>
-                                        @foreach ($posts as $post)
+                                        @foreach ($blogs as $blog)
                                         <?php $i++; ?>
                                         <tr role="row" class="{{ $i % 2 == 0 ? 'odd' : 'even' }}">
-                                            <td class="sorting_1">{{ $post->name }}</td>
+                                            <td class="sorting_1">{{ $blog->name }}</td>
                                             <td class="">
-                                                <a href="{{ url('/post/edit/'.$post->id) }}" class="btn-edit">Sửa</a> | 
-                                                <a href="{{ url('/post/delete/'.$post->id) }}" class="btn-delete">Xóa</a>
+                                                <a href="{{ url('/blog/edit/'.$blog->id) }}" class="btn-edit">Sửa</a> | 
+                                                <a href="{{ url('/blog/delete/'.$blog->id) }}" class="btn-delete">Xóa</a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -85,11 +85,11 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-5">
-                                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to {{ count($posts) }} of {{ $total_posts }} entries</div>
+                                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to {{ count($blogs) }} of {{ $total_blogs }} entries</div>
                             </div>
                             <div class="col-sm-7">
                                 <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                                    {{ $posts->links() }}
+                                    {{ $blogs->links() }}
                                 </div>
                             </div>
                         </div>

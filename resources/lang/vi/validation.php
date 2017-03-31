@@ -115,7 +115,7 @@ return [
     */
 
     'attributes'           => [
-        'post-name' => 'Tên bài viết',
+        'blog-name' => 'Tên bài viết',
     ],
 
 ];
