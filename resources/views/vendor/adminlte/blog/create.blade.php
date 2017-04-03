@@ -3,6 +3,13 @@
 @section('htmlheader_title') {{ trans('adminlte_lang::message.home') }}
 @endsection
 
+@section('contentheader_title')
+    Quản lý bài viết
+@endsection
+@section('contentheader_description')
+    Tạo bài viết
+@endsection
+
 @section('main-content')
 <div class="container-fluid spark-screen">
 
