@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Models\Dal\BlogCModel;
@@ -30,34 +31,41 @@ class ToolController extends Controller
 
     }
 
-    public function get_blog_by_id(Request $request)
-    {
-        return $request->id;
+    public function get_blogs(Request $request) {
+        $blogs = BlogQModel::get_blogs_paging();
+        return json_encode($blogs);
     }
 
-    public function create_blog(Request $request)
-    {
+    public function get_blog($id, Request $request) {
+        return $id;
+    }
+
+    public function create_blog(Request $request) {
+        // return json_encode([
+        //     'token' => $request->header('token'),
+        //     'blog_name' => $request->name, 
+        //     'blog_description' => $request->description
+        // ]);
+        return Response::json([
+            'token' => $request->header('token'),
+            'blog_name' => $request->name, 
+            'blog_description' => $request->description
+        ], 403);
+    }
+
+    public function update_blog($id, Request $request) {
         return json_encode([
             'token' => $request->header('token'),
+            'id' => $id,
             'blog_name' => $request->name, 
             'blog_description' => $request->description
         ]);
     }
 
-    public function update_blog(Request $request)
-    {
+    public function delete_blog($id, Request $request) {
         return json_encode([
             'token' => $request->header('token'),
-            'blog_name' => $request->name, 
-            'blog_description' => $request->description
-        ]);
-    }
-
-    public function delete_blog(Request $request)
-    {
-        return json_encode([
-            'token' => $request->header('token'),
-            'blog_id' => $request->id
+            'blog_id' => $id
         ]);
     }
 }

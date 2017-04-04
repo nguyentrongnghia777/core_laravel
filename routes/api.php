@@ -37,17 +37,17 @@ Route::group(['prefix' => 'tools'], function () {
         return $request->id;
     });
 
-    Route::get('get_blog_by_id', 'Api\ToolController@get_blog_by_id');
-
     Route::get('get_multiparam', function (Illuminate\Http\Request $request) {
         $name = $request->name;
         $id = $request->id;
         return $id;
     });
 
+    Route::get('blog', 'Api\ToolController@get_blogs');
+    Route::get('blog/{id}', 'Api\ToolController@get_blog');
     Route::post('blog', 'Api\ToolController@create_blog');
-    Route::put('blog', 'Api\ToolController@update_blog');
-    Route::delete('blog', 'Api\ToolController@delete_blog');
+    Route::put('blog/{id}', 'Api\ToolController@update_blog');
+    Route::delete('blog/{id}', 'Api\ToolController@delete_blog');
 
     Route::get('users/{user}', function (App\User $user) {
         return $user;
