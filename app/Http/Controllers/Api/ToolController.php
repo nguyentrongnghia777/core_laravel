@@ -46,11 +46,16 @@ class ToolController extends Controller
         //     'blog_name' => $request->name, 
         //     'blog_description' => $request->description
         // ]);
-        return Response::json([
-            'token' => $request->header('token'),
-            'blog_name' => $request->name, 
-            'blog_description' => $request->description
-        ], 403);
+        // return Response::json([
+        //     'token' => $request->header('token'),
+        //     'blog_name' => $request->name, 
+        //     'blog_description' => $request->description
+        // ], 403);
+        return response(json_encode([
+                'token' => $request->header('token'),
+                'blog_name' => $request->name, 
+                'blog_description' => $request->description
+            ]), 403)->header('Content-Type', 'application/json');
     }
 
     public function update_blog($id, Request $request) {
