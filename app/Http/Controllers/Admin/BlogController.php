@@ -25,9 +25,8 @@ class BlogController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        // $this->middleware('auth');
+    public function __construct() {
+
     }
 
     /**
@@ -35,11 +34,9 @@ class BlogController extends Controller
      *
      * @return Response
      */
-    public function index()
-    {
+    public function index() {
         //Get Blogs
         $blogs = BlogQModel::get_blogs_paging();
-        // dd($blogs);
         return view('vendor.adminlte.blog.list', compact('blogs'));
     }
 
@@ -48,8 +45,7 @@ class BlogController extends Controller
      *
      * @return Response
      */
-    public function create()
-    {
+    public function create() {
         return view('vendor/adminlte/blog/create');
     }
 
@@ -59,8 +55,7 @@ class BlogController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         // Validate and store the blog...
         $this->validate($request, [
             'blog-name' => 'bail|required|min:3',
@@ -84,29 +79,27 @@ class BlogController extends Controller
     /**
      * Edit a blog blog.
      *
-     * @param  blog id
+     * @param blog_id
      * @return Response
      */
-    public function edit($blog_id)
-    {
-        //Get Blog
+    public function edit($blog_id) {
+        // Get blog
         $blog = BlogQModel::get_blog_by_id($blog_id);
 
-        // dd($blog);
-        if (count($blog)) {
-            return view('vendor.adminlte.blog.edit', compact('blog'));
+        if (!$blog) {
+            return view('vendor.adminlte.errors.404');
         }
-        return view('vendor.adminlte.errors.404');
+
+        return view('vendor.adminlte.blog.edit', compact('blog'));
     }
 
     /**
      * Update a blog.
      *
-     * @param  blog_id
+     * @param blog_id
      * @return Response
      */
-    public function update($blog_id, Request $request)
-    {
+    public function update($blog_id, Request $request) {
         // Validate and store the blog...
         $this->validate($request, [
             'blog-name' => 'required|min:3',
@@ -129,28 +122,17 @@ class BlogController extends Controller
     /**
      * Delete a blog blog.
      *
-     * @param  blog id
+     * @param blog_id
+     * @param Request $request
      * @return Response
      */
-    public function delete($blog_id, Request $request)
-    {
+    public function delete($blog_id, Request $request) {
         if (BlogCModel::delete_blog($blog_id)) {
             $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
             return back();
+        } else {
+            $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
+            return back();
         }
-        return view('vendor.adminlte.errors.404');
-    }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return  array
-     */
-    public function messages()
-    {
-        return [
-            'title.required' => 'A title is required',
-            'body.required'  => 'A message is required',
-        ];
     }
 }

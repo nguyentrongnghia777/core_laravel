@@ -12,4 +12,7 @@ Class Constants {
 	// user role
     const ROLES_ADMIN = 'admin';
     const ROLES_MEMBER = 'member';
+
+    // paging page admin
+    const ADMIN_DEFAULT_PAGING = 5;
 }
