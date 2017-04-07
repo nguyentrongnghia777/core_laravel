@@ -23,3 +23,33 @@ Route::group(['prefix' => 'v1','middleware' => 'auth:api'], function () {
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_api_routes
 });
+
+Route::group(['prefix' => 'tools'], function () {
+    Route::get('hello', function () {
+        return 'hello';
+    });
+
+    Route::get('get_hello_by_id/{id}', function ($id) {
+        return $id;
+    });
+
+    Route::get('get_hello_by_id', function (Illuminate\Http\Request $request) {
+        return $request->id;
+    });
+
+    Route::get('get_multiparam', function (Illuminate\Http\Request $request) {
+        $name = $request->name;
+        $id = $request->id;
+        return $id;
+    });
+
+    Route::get('blog', 'Api\ToolController@get_blogs');
+    Route::get('blog/{id}', 'Api\ToolController@get_blog');
+    Route::post('blog', 'Api\ToolController@create_blog');
+    Route::put('blog/{id}', 'Api\ToolController@update_blog');
+    Route::delete('blog/{id}', 'Api\ToolController@delete_blog');
+
+    Route::get('users/{user}', function (App\User $user) {
+        return $user;
+    });
+});
