@@ -41,16 +41,6 @@ class ToolController extends Controller
     }
 
     public function create_blog(Request $request) {
-        // return json_encode([
-        //     'token' => $request->header('token'),
-        //     'blog_name' => $request->name, 
-        //     'blog_description' => $request->description
-        // ]);
-        // return Response::json([
-        //     'token' => $request->header('token'),
-        //     'blog_name' => $request->name, 
-        //     'blog_description' => $request->description
-        // ], 403);
         return response(json_encode([
                 'token' => $request->header('token'),
                 'blog_name' => $request->name, 
