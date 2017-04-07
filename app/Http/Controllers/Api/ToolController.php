@@ -26,8 +26,7 @@ class ToolController extends Controller
 
     }
 
-    public function index()
-    {
+    public function index() {
 
     }
 
