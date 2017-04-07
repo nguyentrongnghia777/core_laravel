@@ -1,6 +1,19 @@
 @extends('adminlte::layouts.app')
 
-@section('htmlheader_title') {{ trans('adminlte_lang::message.home') }}
+@section('htmlheader_title')
+    Sửa bài viết
+@endsection
+
+@section('contentheader_title')
+    Quản lý bài viết
+@endsection
+@section('contentheader_description')
+@endsection
+
+@section('contentheader_levels')
+    <li><a href="{{ url('/admincp') }}"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+    <li><a href="{{ url('/admincp/blog') }}">Quản lý bài viết</a></li>
+    <li class="active">Sửa bài viết</li>
 @endsection
 
 @section('main-content')
@@ -34,7 +47,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form role="form" method="POST" action="{{ url('blog/update/'. $blog[0]->id) }}">
+                        <form role="form" method="POST" action="{{ url('/admincp/blog/update/'. $blog[0]->id) }}">
                             {{ csrf_field() }}
                             <!-- text input -->
                             <div class="form-group">

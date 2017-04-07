@@ -1,13 +1,19 @@
 @extends('adminlte::layouts.app')
 
-@section('htmlheader_title') {{ trans('adminlte_lang::message.home') }}
+@section('htmlheader_title')
+    Tạo bài viết
 @endsection
 
 @section('contentheader_title')
     Quản lý bài viết
 @endsection
 @section('contentheader_description')
-    Tạo bài viết
+@endsection
+
+@section('contentheader_levels')
+    <li><a href="{{ url('/admincp') }}"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+    <li><a href="{{ url('/admincp/blog') }}">Quản lý bài viết</a></li>
+    <li class="active">Tạo bài viết</li>
 @endsection
 
 @section('main-content')
@@ -24,36 +30,34 @@
     <div class="row">
         <div class="col-md-12">
             <!-- Default box -->
-            <div class="box">
-                <div class="box box-warning">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Tạo bài viết</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <form role="form" method="POST" action="{{ url('/blog/store') }}">
-                            {{ csrf_field() }}
-                            <!-- text input -->
-                            <div class="form-group">
-                                <label>Tên bài viết</label>
-                                <input type="text" class="form-control" placeholder="Tên bài viết ..." name="blog-name" value="{{ old('blog-name') }}">
-                            </div>
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Lưu</button>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.box-body -->
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tạo bài viết</h3>
                 </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form role="form" method="POST" action="{{ url('/admincp/blog/store') }}">
+                        {{ csrf_field() }}
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Tên bài viết</label>
+                            <input type="text" class="form-control" placeholder="Tên bài viết ..." name="blog-name" value="{{ old('blog-name') }}">
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-body -->
             </div>
             <!-- /.box -->
         </div>

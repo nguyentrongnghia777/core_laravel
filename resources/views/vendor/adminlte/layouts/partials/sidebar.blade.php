@@ -38,8 +38,8 @@
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Quản lý bài viết</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('/blog') }}">Danh sách bài viết</a></li>
-                    <li><a href="{{ url('/blog/create') }}">Tạo bài viết</a></li>
+                    <li><a href="{{ url('/admincp/blog') }}">Danh sách bài viết</a></li>
+                    <li><a href="{{ url('/admincp/blog/create') }}">Tạo bài viết</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

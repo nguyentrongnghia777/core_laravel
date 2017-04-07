@@ -1,13 +1,18 @@
 @extends('adminlte::layouts.app')
 
-@section('htmlheader_title') {{ trans('adminlte_lang::message.home') }}
+@section('htmlheader_title')
+    Danh sách bài viết
 @endsection
 
 @section('contentheader_title')
     Quản lý bài viết
 @endsection
 @section('contentheader_description')
-    Danh sách bài viết
+@endsection
+
+@section('contentheader_levels')
+    <li><a href="{{ url('/admincp') }}"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+    <li class="active">Quản lý bài viết</li>
 @endsection
 
 @section('main-content')
@@ -65,9 +70,9 @@
                                         <tr role="row" class="{{ $i % 2 == 0 ? 'odd' : 'even' }}">
                                             <td class="sorting_1">{{ $blog->name }}</td>
                                             <td class="">
-                                                <a href="{{ url('/blog/edit/'.$blog->id) }}" class="btn-edit " title="Sửa">
+                                                <a href="{{ url('/admincp/blog/edit/'.$blog->id) }}" class="btn-edit " title="Sửa">
                                                 </a>
-                                                <a href="{{ url('/blog/delete/'.$blog->id) }}" class="btn-delete" title="Xóa">
+                                                <a href="{{ url('/admincp/blog/delete/'.$blog->id) }}" class="btn-delete" title="Xóa">
                                                 </a>
                                             </td>
                                         </tr>
