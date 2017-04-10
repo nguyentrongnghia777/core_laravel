@@ -103,14 +103,14 @@ class CategoryController extends Controller
     public function update($id, Request $request) {
         // Validate and store the blog...
         $this->validate($request, [
-            'name' => 'required|min:3',
-            'desc' => 'required'
+            'category-name' => 'required|min:3',
+            'category-desc' => 'required'
         ]);
 
         // Create needed array to update to DB
         $data = [
-            'name' => $_POST['name'],
-            'desc' => $_POST['desc']
+            'name' => $_POST['category-name'],
+            'desc' => $_POST['category-desc']
         ];
 
         if (CategoryCModel::update_category($id, $data)) {

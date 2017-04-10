@@ -51,9 +51,9 @@
                         <!-- text input -->
                         <div class="form-group">
                             <label>Tên thể loại</label>
-                            <input type="text" class="form-control" placeholder="Tên thể loại ..." name="name" value="{{ $category->name }}">
+                            <input type="text" class="form-control" placeholder="Tên thể loại ..." name="category-name" value="{{ $category->name }}">
                             <label>Mô tả thể loại</label>
-                            <input type="text" class="form-control" placeholder="Tên thể loại ..." name="desc" value="{{ $category->desc }}">
+                            <input type="text" class="form-control" placeholder="Tên thể loại ..." name="category-desc" value="{{ $category->desc }}">
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Lưu</button>
