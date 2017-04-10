@@ -18,7 +18,7 @@ use App\Http\Models\Dal\CategoryQModel;
  * Class BlogController
  * @package App\Http\Controllers\Admin
  */
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -37,7 +37,7 @@ class CategoriesController extends Controller
     public function index() {
         //Get Categories
         $categories = CategoryQModel::get_categories_paging();
-        return view('vendor.adminlte.categories.list', compact('categories'));  
+        return view('vendor.adminlte.category.list', compact('categories'));  
     }
 
     /**
@@ -46,7 +46,7 @@ class CategoriesController extends Controller
      * @return Response
      */
     public function create() {
-        return view('vendor/adminlte/categories/create');
+        return view('vendor/adminlte/category/create');
     }
 
     /**
@@ -58,17 +58,17 @@ class CategoriesController extends Controller
     public function store(Request $request) {
         // Validate and store the categories...
         $this->validate($request, [
-            'name' => 'bail|required|min:5',
-            'desc' => 'required|min:5'
+            'category-name' => 'bail|required|min:5',
+            'category-desc' => 'required|min:5'
         ]);
 
         // Create item to insert db
         $data = [
-            'name' => $_POST['name'],
-            'desc' => $_POST['desc']
+            'name' => $_POST['category-name'],
+            'desc' => $_POST['category-desc']
         ];
         
-        if (CategoriyCModel::insert_category($data)) {
+        if (CategoryCModel::insert_category($data)) {
             $request->session()->flash('alert-success', 'Thể loại đã được tạo thành công!');
             return back();
         } else {
@@ -91,7 +91,7 @@ class CategoriesController extends Controller
             return view('vendor.adminlte.errors.404');
         }
 
-        return view('vendor.adminlte.categories.edit', compact('category'));
+        return view('vendor.adminlte.category.edit', compact('category'));
     }
 
     /**

@@ -31,22 +31,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/update/{id}', 'Admin\BlogController@update');
             Route::get('/delete/{id}', 'Admin\BlogController@delete');
         });
-    });
-});
 
-//Categories
-Route::group(['middleware' => ['auth']], function () {
-    Route::group(['prefix' => 'admincp', 'middleware' => ['admin']], function () {
-
-        Route::get('/', 'Admin\HomeController@index');
-
-        Route::group(['prefix' => 'categories'], function () {
-            Route::get('/', 'Admin\CategoriesController@index');
-            Route::get('/create', 'Admin\CategoriesController@create');
-            Route::post('/store', 'Admin\CategoriesController@store');
-            Route::get('/edit/{id}', 'Admin\CategoriesController@edit');
-            Route::post('/update/{id}', 'Admin\CategoriesController@update');
-            Route::get('/delete/{id}', 'Admin\CategoriesController@delete');
+        // Categories
+        Route::group(['prefix' => 'category'], function () {
+            Route::get('/', 'Admin\CategoryController@index');
+            Route::get('/create', 'Admin\CategoryController@create');
+            Route::post('/store', 'Admin\CategoryController@store');
+            Route::get('/edit/{id}', 'Admin\CategoryController@edit');
+            Route::post('/update/{id}', 'Admin\CategoryController@update');
+            Route::get('/delete/{id}', 'Admin\CategoryController@delete');
         });
     });
 });

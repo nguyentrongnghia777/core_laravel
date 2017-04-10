@@ -12,7 +12,7 @@
 
 @section('contentheader_levels')
     <li><a href="{{ url('/admincp') }}"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
-    <li><a href="{{ url('/admincp/categories') }}">Quản lý thể loại</a></li>
+    <li><a href="{{ url('/admincp/category') }}">Quản lý thể loại</a></li>
     <li class="active">Tạo thể loại</li>
 @endsection
 
@@ -45,16 +45,16 @@
                             </ul>
                         </div>
                     @endif
-                    <form role="form" method="POST" action="{{ url('/admincp/categories/store') }}">
+                    <form role="form" method="POST" action="{{ url('/admincp/category/store') }}">
                         {{ csrf_field() }}
                         <!-- text input -->
                         <div class="form-group">
                             <label>Tên thể loại</label>
-                            <input type="text" class="form-control" placeholder="Tên thể loại ..." name="name" value="{{ old('blog-name') }}">
+                            <input type="text" class="form-control" placeholder="Tên thể loại ..." name="category-name" value="{{ old('category-name') }}">
                         </div>
                         <div class="form-group">
                             <label>Mô tả thể loại</label>
-                            <input type="text" class="form-control" placeholder="Mô tả thể loại ..." name="desc" value="{{ old('blog-name') }}">
+                            <input type="text" class="form-control" placeholder="Mô tả thể loại ..." name="category-desc" value="{{ old('category-desc') }}">
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Lưu</button>

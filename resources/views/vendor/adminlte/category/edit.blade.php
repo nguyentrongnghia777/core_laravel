@@ -12,7 +12,7 @@
 
 @section('contentheader_levels')
     <li><a href="{{ url('/admincp') }}"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
-    <li><a href="{{ url('/admincp/categories') }}">Quản lý thể loại</a></li>
+    <li><a href="{{ url('/admincp/category') }}">Quản lý thể loại</a></li>
     <li class="active">Sửa thể loại</li>
 @endsection
 
@@ -46,7 +46,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form role="form" method="POST" action="{{ url('/admincp/categories/update/'. $category->id) }}">
+                    <form role="form" method="POST" action="{{ url('/admincp/category/update/'. $category->id) }}">
                         {{ csrf_field() }}
                         <!-- text input -->
                         <div class="form-group">

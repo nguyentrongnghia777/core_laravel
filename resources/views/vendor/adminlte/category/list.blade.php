@@ -12,7 +12,7 @@
 
 @section('contentheader_levels')
     <li><a href="{{ url('/admincp') }}"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
-    <li><a href="{{ url('/admincp/categories') }}">Quản lý thể loại</a></li>
+    <li><a href="{{ url('/admincp/category') }}">Quản lý thể loại</a></li>
     <li class="active">Danh sách thể loại</li>
 @endsection
 
@@ -77,12 +77,12 @@
                                         <?php $i++; ?>
                                         <tr role="row" class="{{ $i % 2 == 0 ? 'odd' : 'even' }}">
                                             <td class="sorting_1">{{ $items->id }}</td>
-                                            <td class="sorting_1">{{ $items->name }}</td>
-                                            <td class="sorting_1">{{ $items->desc }}</td>
+                                    <td class="sorting_1">{{ $items->name }}</td>
+                                    <td class="sorting_1">{{ $items->desc }}</td>
                                             <td class="">
-                                                <a href="{{ url('/admincp/categories/edit/'.$items->id) }}" class="btn-edit " title="Sửa">
+                                                <a href="{{ url('/admincp/category/edit/'.$items->id) }}" class="btn-edit " title="Sửa">
                                                 </a>
-                                                <a href="{{ url('/admincp/categories/delete/'.$items->id) }}" class="btn-delete" title="Xóa">
+                                                <a href="{{ url('/admincp/category/delete/'.$items->id) }}" class="btn-delete" title="Xóa">
                                                 </a>
                                             </td>
                                         </tr>
