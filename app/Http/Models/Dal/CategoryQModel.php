@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Helpers\Constants;
 
-class CategoriesQModel extends Model
+class CategoryQModel extends Model
 {
     /**
-     * get categories by id
+     * get category by id
      * @param id
      * @return object|boolean : all properties from `categories` table,
      * returns false if no categories is founded
      */
-    public static function get_categories_by_id($id) {
+    public static function get_category_by_id($id) {
         $result = DB::table(Constants::CATEGORIES)
                 ->where('id', '=', $id)
                 ->get();

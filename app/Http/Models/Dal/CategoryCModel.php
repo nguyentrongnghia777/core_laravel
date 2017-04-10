@@ -6,24 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Http\Helpers\Constants;
 
-class CategoriesCModel extends Model
+class CategoryCModel extends Model
 {
     /**
-     * insert categories
+     * insert category
      * @param array data
      * @return boolean
      */
-    public static function insert_categories($data) {
+    public static function insert_category($data) {
         return DB::table(Constants::CATEGORIES)->insert($data);
     }
 
     /**
-     * update categories
+     * update category
      * @param id
      * @param array data
      * @return boolean
      */
-    public static function update_categories($id, $data) {
+    public static function update_category($id, $data) {
         return DB::table(Constants::CATEGORIES)
                 ->where('id', $id)
                 ->update($data);
@@ -34,7 +34,7 @@ class CategoriesCModel extends Model
      * @param id
      * @return boolean
      */
-    public static function delete_categories($id) {
+    public static function delete_category($id) {
         return DB::table(Constants::CATEGORIES)
             ->where('id', '=', $id)
             ->delete();

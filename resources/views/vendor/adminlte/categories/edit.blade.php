@@ -12,7 +12,7 @@
 
 @section('contentheader_levels')
     <li><a href="{{ url('/admincp') }}"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
-    <li><a href="{{ url('/admincp/blog') }}">Quản lý thể loại</a></li>
+    <li><a href="{{ url('/admincp/categories') }}">Quản lý thể loại</a></li>
     <li class="active">Sửa thể loại</li>
 @endsection
 

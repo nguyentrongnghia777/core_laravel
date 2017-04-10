@@ -11,8 +11,8 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Models\Dal\CategoriesCModel;
-use App\Http\Models\Dal\CategoriesQModel;
+use App\Http\Models\Dal\CategoryCModel;
+use App\Http\Models\Dal\CategoryQModel;
 
 /**
  * Class BlogController
@@ -36,7 +36,7 @@ class CategoriesController extends Controller
      */
     public function index() {
         //Get Categories
-        $categories = CategoriesQModel::get_categories_paging();
+        $categories = CategoryQModel::get_categories_paging();
         return view('vendor.adminlte.categories.list', compact('categories'));  
     }
 
@@ -68,7 +68,7 @@ class CategoriesController extends Controller
             'desc' => $_POST['desc']
         ];
         
-        if (CategoriesCModel::insert_categories($data)) {
+        if (CategoriyCModel::insert_category($data)) {
             $request->session()->flash('alert-success', 'Thể loại đã được tạo thành công!');
             return back();
         } else {
@@ -85,7 +85,7 @@ class CategoriesController extends Controller
      */
     public function edit($id) {
         // Get categories
-        $category = CategoriesQModel::get_categories_by_id($id);
+        $category = CategoryQModel::get_category_by_id($id);
 
         if (!$category) {
             return view('vendor.adminlte.errors.404');
@@ -113,7 +113,7 @@ class CategoriesController extends Controller
             'desc' => $_POST['desc']
         ];
 
-        if (CategoriesCModel::update_categories($id, $data)) {
+        if (CategoryCModel::update_category($id, $data)) {
             $request->session()->flash('alert-success', 'Thể loại đã được cập nhật thành công!');
             return back();
         } else {
@@ -130,7 +130,7 @@ class CategoriesController extends Controller
      * @return Response
      */
     public function delete($id, Request $request) {
-        if (CategoriesCModel::delete_categories($id)) {
+        if (CategoryCModel::delete_category($id)) {
             $request->session()->flash('alert-success', 'Thể loại đã được xóa thành công!');
             return back();
         } else {
