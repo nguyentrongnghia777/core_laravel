@@ -1,7 +1,7 @@
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
-    Tạo bài viết
+    Tạo thể loại
 @endsection
 
 @section('contentheader_title')

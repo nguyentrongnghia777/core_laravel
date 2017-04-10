@@ -1,11 +1,11 @@
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
-    Sửa bài viết
+    Sửa thể loại
 @endsection
 
 @section('contentheader_title')
-    Quản lý bài viết
+    Quản lý thể loại
 @endsection
 @section('contentheader_description')
 @endsection

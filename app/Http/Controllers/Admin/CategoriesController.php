@@ -69,7 +69,7 @@ class CategoriesController extends Controller
         ];
         
         if (CategoriesCModel::insert_categories($data)) {
-            $request->session()->flash('alert-success', 'Thể đã được tạo thành công!');
+            $request->session()->flash('alert-success', 'Thể loại đã được tạo thành công!');
             return back();
         } else {
             $request->session()->flash('alert-danger', 'Thể loại tạo không thành công!');
@@ -114,10 +114,10 @@ class CategoriesController extends Controller
         ];
 
         if (CategoriesCModel::update_categories($id, $data)) {
-            $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
+            $request->session()->flash('alert-success', 'Thể loại đã được cập nhật thành công!');
             return back();
         } else {
-            $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
+            $request->session()->flash('alert-danger', 'Thể loại cập nhật không thành công!');
             return back();
         }
     }
@@ -131,10 +131,10 @@ class CategoriesController extends Controller
      */
     public function delete($id, Request $request) {
         if (CategoriesCModel::delete_categories($id)) {
-            $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
+            $request->session()->flash('alert-success', 'Thể loại đã được xóa thành công!');
             return back();
         } else {
-            $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
+            $request->session()->flash('alert-danger', 'Thể loại xóa không thành công!');
             return back();
         }
     }
