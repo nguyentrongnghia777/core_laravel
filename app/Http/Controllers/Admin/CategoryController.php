@@ -30,15 +30,26 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show list categories.
+     * Show list and search categories.
      *
      * @return Response
      */
-    public function index() {
-        //Get Categories
-        $categories = CategoryQModel::get_categories_paging();
-        return view('vendor.adminlte.category.list', compact('categories'));  
-    }
+    public function index(Request $request) {
+        //Get and search Categories
+        if(isset($_POST['search-category'])) {
+            $search = $_POST['search-category'];
+        } else {
+            $search = '';
+        }
+        $categories = CategoryQModel::get_categories_paging($search);
+
+        if (empty($categories[0])) {
+            $request->session()->flash('alert-danger', 'Tên thể loại này không có trong cơ sở dữ liệu!');
+            return back();
+        } else {
+            return view('vendor.adminlte.category.list', compact('categories')); 
+        }
+}
 
     /**
      * Show form create blog.

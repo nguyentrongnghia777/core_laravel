@@ -35,11 +35,13 @@ Route::group(['middleware' => ['auth']], function () {
         // Categories
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', 'Admin\CategoryController@index');
+            Route::post('/', 'Admin\CategoryController@index');
             Route::get('/create', 'Admin\CategoryController@create');
             Route::post('/store', 'Admin\CategoryController@store');
             Route::get('/edit/{id}', 'Admin\CategoryController@edit');
             Route::post('/update/{id}', 'Admin\CategoryController@update');
             Route::get('/delete/{id}', 'Admin\CategoryController@delete');
+            Route::post('/search', 'Admin\CategoryController@search');
         });
     });
 });

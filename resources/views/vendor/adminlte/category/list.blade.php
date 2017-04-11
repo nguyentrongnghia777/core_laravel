@@ -44,11 +44,11 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div id="example1_filter" class="dataTables_filter pull-right">
-                                <form action="#" method="POST">
+                                <form action="{{url('admincp/category')}}" method="POST">
                                 {{ csrf_field() }}
 
                                     <div class="input-group input-group-sm">
-                                        <input type="text" name="search"
+                                        <input type="text" name="search-category"
                                         class="form-control" placeholder="Tìm kiếm">
                                         <span class="input-group-btn">
                                           <button type="submit" class="btn btn-info btn-flat">

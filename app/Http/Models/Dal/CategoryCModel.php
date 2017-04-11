@@ -28,7 +28,6 @@ class CategoryCModel extends Model
                 ->where('id', $id)
                 ->update($data);
     }
-
     /**
      * delete a category
      * @param id
