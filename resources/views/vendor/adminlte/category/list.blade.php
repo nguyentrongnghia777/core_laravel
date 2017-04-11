@@ -78,7 +78,7 @@
                                         <tr role="row" class="{{ $i % 2 == 0 ? 'odd' : 'even' }}">
                                             <td class="sorting_1">{{ $items->id }}</td>
                                     <td class="sorting_1">{{ $items->name }}</td>
-                                    <td class="sorting_1">{{ $items->desc }}</td>
+                                    <td class="sorting_1">{{ $items->description }}</td>
                                             <td class="">
                                                 <a href="{{ url('/admincp/category/edit/'.$items->id) }}" class="btn-edit " title="Sửa">
                                                 </a>

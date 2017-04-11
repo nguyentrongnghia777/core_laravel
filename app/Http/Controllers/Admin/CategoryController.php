@@ -65,7 +65,7 @@ class CategoryController extends Controller
         // Create item to insert db
         $data = [
             'name' => $_POST['category-name'],
-            'desc' => $_POST['category-desc']
+            'description' => $_POST['category-desc']
         ];
         
         if (CategoryCModel::insert_category($data)) {
@@ -110,7 +110,7 @@ class CategoryController extends Controller
         // Create needed array to update to DB
         $data = [
             'name' => $_POST['category-name'],
-            'desc' => $_POST['category-desc']
+            'description' => $_POST['category-desc']
         ];
 
         if (CategoryCModel::update_category($id, $data)) {

@@ -53,7 +53,7 @@
                             <label>Tên thể loại</label>
                             <input type="text" class="form-control" placeholder="Tên thể loại ..." name="category-name" value="{{ $category->name }}">
                             <label>Mô tả thể loại</label>
-                            <input type="text" class="form-control" placeholder="Tên thể loại ..." name="category-desc" value="{{ $category->desc }}">
+                            <input type="text" class="form-control" placeholder="Tên thể loại ..." name="category-desc" value="{{ $category->description }}">
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Lưu</button>

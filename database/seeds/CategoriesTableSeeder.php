@@ -16,7 +16,7 @@ class CategoriesTableSeeder extends Seeder
         for ($i = 1; $i < 20; $i++) {
             array_push($data, [
                 'name' => 'Thể loại ' . $i,
-                'desc' => 'Mô tả cho thể loại số'.$i,
+                'description' => 'Mô tả cho thể loại số'.$i,
             ]);
         }
 
