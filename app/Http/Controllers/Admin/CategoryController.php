@@ -70,7 +70,7 @@ class CategoryController extends Controller
         // Validate and store the categories...
         $this->validate($request, [
             'category-name' => 'bail|required|min:5',
-            'category-desc' => 'required|min:5'
+            'category-description' => 'required|min:5'
         ]);
 
         // Create item to insert db
@@ -115,7 +115,7 @@ class CategoryController extends Controller
         // Validate and store the blog...
         $this->validate($request, [
             'category-name' => 'required|min:3',
-            'category-desc' => 'required'
+            'category-description' => 'required'
         ]);
 
         // Create needed array to update to DB
