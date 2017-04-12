@@ -16,6 +16,7 @@ class CreateBlogsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->unsignedMediumInteger('user_id');
+            $table->string('avatar_url');
         });
     }
 

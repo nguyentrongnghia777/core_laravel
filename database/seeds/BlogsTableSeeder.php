@@ -17,6 +17,7 @@ class BlogsTableSeeder extends Seeder
             array_push($data, [
                 'name' => 'bai ' . $i,
                 'user_id' => 1,
+                'avatar_url' => 'test'
             ]);
         }
 
