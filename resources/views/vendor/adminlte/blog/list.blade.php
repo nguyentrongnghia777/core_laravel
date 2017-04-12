@@ -19,7 +19,6 @@
 <div class="container-fluid spark-screen">
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg) @if(Session::has('alert-' . $msg))
-        <?php //var_dump(session()->all()); ?>
         <h4 class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}  <button class="close" data-dismiss="alert" aria-label="close">&times;</button></h4> @endif @endforeach
     </div>
     <!-- end .flash-message -->
@@ -59,6 +58,7 @@
                                 <table id="example2" class="table table-bordered table-striped table-hover dataTable" role="grid" aria-describedby="example2_info">
                                     <thead>
                                         <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Hình đại diện bài viết</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Tên bài viết</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Tác vụ</th>
                                         </tr>
@@ -68,6 +68,9 @@
                                         @foreach ($blogs as $blog)
                                         <?php $i++; ?>
                                         <tr role="row" class="{{ $i % 2 == 0 ? 'odd' : 'even' }}">
+                                            <td class="">
+                                                <img src="{{ asset($blog->avatar_url) }}" alt="" class="img-responsive blog-avatar">
+                                            </td>
                                             <td class="sorting_1">{{ $blog->name }}</td>
                                             <td class="">
                                                 <a href="{{ url('/admincp/blog/edit/'.$blog->id) }}" class="btn-edit " title="Sửa">
@@ -80,6 +83,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
+                                            <th rowspan="1" colspan="1">Hình đại diện bài viết</th>
                                             <th rowspan="1" colspan="1">Tên bài viết</th>
                                             <th rowspan="1" colspan="1">Tác vụ</th>
                                         </tr>

@@ -45,12 +45,16 @@
                             </ul>
                         </div>
                     @endif
-                    <form role="form" method="POST" action="{{ url('/admincp/blog/store') }}">
+                    <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/admincp/blog/store') }}">
                         {{ csrf_field() }}
                         <!-- text input -->
                         <div class="form-group">
                             <label>Tên bài viết</label>
                             <input type="text" class="form-control" placeholder="Tên bài viết ..." name="blog-name" value="{{ old('blog-name') }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Hình đại diện bài viết</label>
+                            <input type="file" class="form-control" name="blog-avatar" value="">
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Lưu</button>

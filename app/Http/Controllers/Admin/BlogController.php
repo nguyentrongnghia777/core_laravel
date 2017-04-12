@@ -59,21 +59,36 @@ class BlogController extends Controller
         // Validate and store the blog...
         $this->validate($request, [
             'blog-name' => 'bail|required|min:3',
+            'blog-avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|required|max:3000'//Support dimension
         ]);
+        // var_dump($_FILES['blog-avatar']); exit();
+        //Check file is valid or not
+        $image = $_FILES['blog-avatar'];
 
-        // Create item to insert db
-        $blog = [
-            'user_id' => Auth::id(),
-            'name' => $_POST['blog-name'],
-        ];
         
-        if (BlogCModel::insert_blog($blog)) {
-            $request->session()->flash('alert-success', 'Bài viết đã được tạo thành công!');
-            return back();
-        } else {
-            $request->session()->flash('alert-danger', 'Bài viết tạo không thành công!');
-            return back();
+        $destination_path = 'uploads/'; // upload path
+        $url_image= basename($image["name"]);
+        $target_image = $destination_path . $url_image;
+        $extension = pathinfo($target_image,PATHINFO_EXTENSION);// get image extension
+        // var_dump($extension); exit();
+        if (move_uploaded_file($image["tmp_name"], $target_image)) {
+            // Create item to insert db
+            $blog = [
+                'user_id' => Auth::id(),
+                'name' => $_POST['blog-name'],
+                'avatar_url' => $target_image
+            ];
+            
+            if (BlogCModel::insert_blog($blog)) {
+                $request->session()->flash('alert-success', 'Bài viết đã được tạo thành công!');
+                return back();
+            } else {
+                $request->session()->flash('alert-danger', 'Bài viết tạo không thành công!');
+                return back();
+            }
         }
+        $request->session()->flash('alert-danger', 'Bài viết tạo không thành công, lỗi upload hình ảnh!');
+        return back();
     }
 
     /**
