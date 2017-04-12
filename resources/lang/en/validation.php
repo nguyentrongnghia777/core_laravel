@@ -117,7 +117,7 @@ return [
     'attributes'           => [
         'post-name' => 'Post name',
         'category-name' => 'Category',
-        'category-desc' => 'Description'
+        'category-description' => 'Description'
     ],
 
 ];

@@ -15,14 +15,13 @@ class CategoryQModel extends Model
      * returns false if no categories is founded
      */
     public static function get_category_by_id($id) {
-        return DB::table(Constants::CATEGORIES)
+        $result = DB::table(Constants::CATEGORIES)
                 ->where('id', '=', $id)
                 ->get();
 
         if (empty($result[0])) {
             return FALSE;
         }
-
         return $result[0];
     }
 

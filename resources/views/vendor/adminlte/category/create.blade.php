@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label>Mô tả thể loại</label>
-                            <input type="text" class="form-control" placeholder="Mô tả thể loại ..." name="category-desc" value="{{ old('category-desc') }}">
+                            <input type="text" class="form-control" placeholder="Mô tả thể loại ..." name="category-description" value="{{ old('category-desc') }}">
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Lưu</button>

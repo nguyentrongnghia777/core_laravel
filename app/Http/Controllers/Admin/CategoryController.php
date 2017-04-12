@@ -76,7 +76,7 @@ class CategoryController extends Controller
         // Create item to insert db
         $data = [
             'name' => $_POST['category-name'],
-            'description' => $_POST['category-desc']
+            'description' => $_POST['category-description']
         ];
         
         if (CategoryCModel::insert_category($data)) {
@@ -97,7 +97,6 @@ class CategoryController extends Controller
     public function edit($id) {
         // Get categories
         $category = CategoryQModel::get_category_by_id($id);
-
         if (!$category) {
             return view('vendor.adminlte.errors.404');
         }
@@ -121,7 +120,7 @@ class CategoryController extends Controller
         // Create needed array to update to DB
         $data = [
             'name' => $_POST['category-name'],
-            'description' => $_POST['category-desc']
+            'description' => $_POST['category-description']
         ];
 
         if (CategoryCModel::update_category($id, $data)) {

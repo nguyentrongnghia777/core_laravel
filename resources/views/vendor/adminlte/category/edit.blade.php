@@ -46,14 +46,16 @@
                             </ul>
                         </div>
                     @endif
+                    
                     <form role="form" method="POST" action="{{ url('/admincp/category/update/'. $category->id) }}">
                         {{ csrf_field() }}
                         <!-- text input -->
+
                         <div class="form-group">
                             <label>Tên thể loại</label>
                             <input type="text" class="form-control" placeholder="Tên thể loại ..." name="category-name" value="{{ $category->name }}">
                             <label>Mô tả thể loại</label>
-                            <input type="text" class="form-control" placeholder="Tên thể loại ..." name="category-desc" value="{{ $category->description }}">
+                            <input type="text" class="form-control" placeholder="Tên thể loại ..." name="category-description" value="{{ $category->description }}">
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Lưu</button>
