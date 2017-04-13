@@ -83,6 +83,17 @@ a {
     background-repeat: no-repeat;
 }
 
+#upload {
+  position: relative;
+  margin: 0;
+  /*max-width: 50%;*/
+}
+
+#upload img {
+    max-width: 30%;
+    min-width: 20%;
+}
+
 .blog-avatar {
     max-width: 100px;
     max-height: 100px;

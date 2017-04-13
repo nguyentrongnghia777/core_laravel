@@ -53,8 +53,10 @@
                             <input type="text" class="form-control" placeholder="Tên bài viết ..." name="blog-name" value="{{ old('blog-name') }}">
                         </div>
                         <div class="form-group">
-                            <label>Hình đại diện bài viết</label>
-                            <input type="file" class="form-control" name="blog-avatar" value="">
+                            <label>Hình đại diện</label><br />
+                            <label id="upload">
+                                <input type="file" name="blog-avatar">
+                            </label>
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Lưu</button>

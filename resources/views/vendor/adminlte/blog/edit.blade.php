@@ -52,6 +52,12 @@
                             <label>Tên bài viết</label>
                             <input type="text" class="form-control" placeholder="Tên bài viết ..." name="blog-name" value="{{ $blog->name }}">
                         </div>
+                        <div class="form-group">
+                            <label>Hình đại diện</label><br />
+                            <label id="upload" exist-img="{{ url('uploads').'/'.$blog->avatar_url }}">
+                                <input type="file" name="blog-avatar">
+                            </label>
+                        </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Lưu</button>
                         </div>

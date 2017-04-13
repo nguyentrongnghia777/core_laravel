@@ -58,7 +58,7 @@
                                 <table id="example2" class="table table-bordered table-striped table-hover dataTable" role="grid" aria-describedby="example2_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Hình đại diện bài viết</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Hình đại diện</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Tên bài viết</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Tác vụ</th>
                                         </tr>
@@ -69,7 +69,7 @@
                                         <?php $i++; ?>
                                         <tr role="row" class="{{ $i % 2 == 0 ? 'odd' : 'even' }}">
                                             <td class="">
-                                                <img src="{{ asset($blog->avatar_url) }}" alt="" class="img-responsive blog-avatar">
+                                                <img src="{{ asset('uploads/'.$blog->avatar_url) }}" alt="" class="img-responsive blog-avatar">
                                             </td>
                                             <td class="sorting_1">{{ $blog->name }}</td>
                                             <td class="">
