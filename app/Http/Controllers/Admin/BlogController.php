@@ -125,37 +125,38 @@ class BlogController extends Controller
         ]);
 
         // Process upload image
+        $flag = FALSE;
+        // Get blog
+        $blog = BlogQModel::get_blog_by_id($blog_id);
+        $old_avatar = $blog->avatar_url;
         // Check file
         if($request->hasFile('blog-avatar')){
+            $flag = TRUE;
             $destination = 'uploads/';
             $file = Input::file('blog-avatar');
             $name = $file->getClientOriginalName();
-
-            //Find old avatar file and delete it.
-            // Get blog
-            $blog = BlogQModel::get_blog_by_id($blog_id);
-            $old_avatar = $blog->avatar_url;
-            File::delete($old_avatar);
-
-
-            // Create needed array to update to DB
-            $blog = [
-                'name' => $_POST['blog-name'],
-                'avatar_url' => $name
-            ];
-            
-            if (BlogCModel::update_blog($blog_id, $blog)) {
+        }
+        
+        // Create needed array to update to DB
+        $blog = [
+            'name' => $_POST['blog-name'],
+            'avatar_url' => ($flag == TRUE) ? $name : $old_avatar
+        ];
+        
+        if (BlogCModel::update_blog($blog_id, $blog)) {
+            if ($flag == TRUE) {
+                //Find old avatar file and delete it.
+                File::delete($old_avatar);
+                
                 //Move file to server
                 $file->move(public_path().'/'.$destination, $name);
-                $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
-                return back();
-            } else {
-                $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
-                return back();
             }
+            $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
+            return back();
+        } else {
+            $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
+            return back();
         }
-        $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
-        return back();
     }
 
     /**
