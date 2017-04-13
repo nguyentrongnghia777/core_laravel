@@ -39,7 +39,14 @@
                 <a href="#"><i class='fa fa-link'></i> <span>Quản lý thể loại</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('/admincp/category') }}">Danh sách thể loại</a></li>
-                    <li><a href="{{ url('/admincp/category/create') }}">Tạo thể loại</a></li>
+                    <li><a href="{{ url('/admincp/category/create') }}">Tạo mới thể loại</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-link'></i> <span>Quản lý sản phẩm</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('/admincp/product') }}">Danh sách sản phẩm</a></li>
+                    <li><a href="{{ url('/admincp/product/create') }}">Tạo mới sản phẩm</a></li>
                 </ul>
             </li>
             <li class="treeview">

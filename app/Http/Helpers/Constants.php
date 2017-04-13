@@ -9,6 +9,7 @@ Class Constants {
 	const GROUPS = 'groups';
 	const BLOGS = 'blogs';
 	const CATEGORIES = 'categories';
+	const PRODUCTS = 'products';
 
 	// user role
     const ROLES_ADMIN = 'admin';

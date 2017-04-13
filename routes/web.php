@@ -43,5 +43,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/delete/{id}', 'Admin\CategoryController@delete');
             Route::post('/search', 'Admin\CategoryController@search');
         });
+
+        // Products
+        Route::group(['prefix' => 'product'], function () {
+            Route::get('/', 'Admin\ProductController@index');
+            Route::get('/create', 'Admin\ProductController@create');
+            Route::post('/store', 'Admin\ProductController@store');
+            Route::get('/edit/{id}', 'Admin\ProductController@edit');
+             Route::get('/delete/{id}', 'Admin\ProductController@delete');
+        });
     });
 });
