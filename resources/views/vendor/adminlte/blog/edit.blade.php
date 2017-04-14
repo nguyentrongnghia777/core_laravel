@@ -45,7 +45,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form role="form" method="POST" action="{{ url('/admincp/blog/update/'. $blog->id) }}">
+                    <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/admincp/blog/update/'. $blog->id) }}">
                         {{ csrf_field() }}
                         <!-- text input -->
                         <div class="form-group">

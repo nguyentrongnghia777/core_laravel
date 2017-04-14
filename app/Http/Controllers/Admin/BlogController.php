@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Models\Dal\BlogCModel;
 use App\Http\Models\Dal\BlogQModel;
 use Illuminate\Support\Facades\Input;
+use File;
 
 /**
  * Class BlogController
@@ -116,13 +117,12 @@ class BlogController extends Controller
      * @return Response
      */
     public function update($blog_id, Request $request) {
-        // $file = Input::file('blog-avatar');
-        //     dd($file);
         // Validate and store the blog...
         $this->validate($request, [
             'blog-name' => 'required|min:3',
             'blog-avatar' => 'image|mimes:jpeg,png,jpg,svg|max:3000'//Support dimension
         ]);
+        
 
         // Process upload image
         $flag = FALSE;
@@ -145,11 +145,11 @@ class BlogController extends Controller
         
         if (BlogCModel::update_blog($blog_id, $blog)) {
             if ($flag == TRUE) {
-                //Find old avatar file and delete it.
-                File::delete($old_avatar);
-                
                 //Move file to server
                 $file->move(public_path().'/'.$destination, $name);
+
+                //Find old avatar file and delete it.
+                File::delete(public_path().'/'.$destination.'/'.$old_avatar);
             }
             $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
             return back();
@@ -167,7 +167,14 @@ class BlogController extends Controller
      * @return Response
      */
     public function delete($blog_id, Request $request) {
+        $destination = 'uploads/';
+        // Get blog
+        $blog = BlogQModel::get_blog_by_id($blog_id);
+        $old_avatar = $blog->avatar_url;
         if (BlogCModel::delete_blog($blog_id)) {
+            //Find old avatar file and delete it.
+            File::delete(public_path().'/'.$destination.'/'.$old_avatar);
+
             $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
             return back();
         } else {
