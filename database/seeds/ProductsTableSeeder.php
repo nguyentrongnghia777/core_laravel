@@ -19,7 +19,8 @@ class ProductsTableSeeder extends Seeder
                 'description' => 'Mô tả cho sản phẩm số'.$i,
                 'slug' => 'san-pham-'.$i,
                 'quantity' => '2',
-                'images' => 'image'.$i.'.png'
+                'images' => 'image'.$i.'.png',
+                'price' => '200000'
             ]);
         }
 

@@ -53,12 +53,8 @@
                             <input type="text" class="form-control" placeholder="Tên sản phẩm ..." name="product-name" value="{{ old('product-name') }}">
                         </div>
                         <div class="form-group">
-                            <label>Mô tả sản phẩm</label>
-                            <input type="text" class="form-control" placeholder="Mô tả sản phẩm ..." name="product-description" value="{{ old('product-description') }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Slug dùng cho SEO</label>
-                            <input type="text" class="form-control" placeholder="Slug dùng cho SEO ..." name="product-slug" value="{{ old('product-slug') }}">
+                            <label>Giá</label>
+                            <input type="text" class="form-control" placeholder="Gái sản phẩm ..." name="product-price" value="{{ old('product-price') }}">
                         </div>
                         <div class="form-group">
                             <label>Số lượng</label>
@@ -68,8 +64,12 @@
                             <label>Hình ảnh</label>
                             <input type="file" class="form-control" placeholder="" name="product-images">
                         </div>
+                        <div class="form-group">
+                            <label>Mô tả sản phẩm</label>
+                            <textarea class="ckeditor" name="product-description" cols="80" rows="10"></textarea>
+                        </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            <button type="submit" class="btn btn-primary" style="float: right;margin-right: 100px;padding: 5px 40px 5px 40px;">Lưu</button>
                         </div>
                     </form>
                 </div>

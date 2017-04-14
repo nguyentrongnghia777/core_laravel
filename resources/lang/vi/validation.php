@@ -117,7 +117,11 @@ return [
     'attributes'           => [
         'blog-name' => 'Tên bài viết',
         'category-name' => 'Tên thể loại',
-        'category-description' => 'Mô tả thể loại'
+        'category-description' => 'Mô tả thể loại',
+        'product-name' => 'Tên sản phẩm',
+        'product-description' => 'Mô tả sản phẩm',
+        'product-price' => 'Giá sản phẩm',
+        'product-quantity' => 'Số lượng sản phẩm'
     ],
 
 ];

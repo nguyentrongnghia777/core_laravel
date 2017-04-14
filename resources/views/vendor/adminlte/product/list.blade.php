@@ -68,8 +68,7 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">STT</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Hình ảnh</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Tên sản phẩm</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Mô tả sản phẩm</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Slug</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Giá SP</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Số lượng</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Tác vụ</th>
                                         </tr>
@@ -82,9 +81,8 @@
                                             <td class="sorting_1">{{ $items->id }}</td>
                                             <td class="sorting_1 "><img class="custom-image" src="{{asset('uploads/'.$items->images)}}"></td>
                                             <td class="sorting_1">{{ $items->name }}</td>
-                                            <td class="sorting_1">{{ $items->description }}</td>
-                                            <td class="sorting_1">{{ $items->slug }}</td>
-                                            <td class="sorting_1">{{ $items->quantity }}</td>
+                                            <td class="sorting_1 ">{{ number_format($items->price) }}<span> Đ</span></td>
+                                            <td class="sorting_1">{{ $items->quantity }}</td>             
                                             <td class="">
                                                 <a href="{{ url('/admincp/product/edit/'.$items->id) }}" class="btn-edit " title="Sửa">
                                                 </a>

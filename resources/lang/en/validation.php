@@ -117,7 +117,11 @@ return [
     'attributes'           => [
         'post-name' => 'Post name',
         'category-name' => 'Category',
-        'category-description' => 'Description'
+        'category-description' => 'Description',
+        'product-name' => 'Product',
+        'product-description' => 'Description',
+        'product-price' => 'Price',
+        'product-quantity' => 'Quantity'
     ],
 
 ];

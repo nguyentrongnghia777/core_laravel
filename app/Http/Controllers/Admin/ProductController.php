@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Input;
 
 
 /**
- * Class BlogController
+ * Class ProductController
  * @package App\Http\Controllers\Admin
  */
 class ProductController extends Controller
@@ -70,26 +70,33 @@ class ProductController extends Controller
      */
     public function store(Request $request) {
         // Validate and store the categories...
-        /*$this->validate($request, [
-            'product-name' => 'bail|required|min:5',
-            'product-description' => 'required|min:5'
-        ]);*/
+        $this->validate($request, [
+            'product-name' => 'bail|required|min:5|max:20',
+            'product-description' => 'required|min:5',
+            'product-price' => 'integer',
+            'product-quantity' => 'integer'
+        ]);
+
 
         // Create item to insert db
         $data = [
             'name' => $_POST['product-name'],
-            'description' => $_POST['product-description'],
-            'slug' => $_POST['product-slug'],
+            'description' => strip_tags($_POST['product-description'],'p'),
+            // remove <p></p> generate from CKEditor
+            'price' => $_POST['product-price'],
+            'slug' => str_slug($_POST['product-name']),
+            // Cover string to slug
             'quantity' => $_POST['product-quantity'],
             'images' => input::file('product-images')->getClientOriginalName()
         ];
+
         input::file('product-images')->move('uploads/',input::file('product-images')->getClientOriginalName());
         
         if (ProductCModel::insert_product($data)) {
-            $request->session()->flash('alert-success', 'Thể loại đã được tạo thành công!');
+            $request->session()->flash('alert-success', 'Sản phẩm đã được tạo thành công!');
             return back();
         } else {
-            $request->session()->flash('alert-danger', 'Thể loại tạo không thành công!');
+            $request->session()->flash('alert-danger', 'Sản phẩm tạo không thành công!');
             return back();
         }
     }
@@ -147,10 +154,10 @@ class ProductController extends Controller
      */
     public function delete($id, Request $request) {
         if (ProductCModel::delete_product($id)) {
-            $request->session()->flash('alert-success', 'Thể loại đã được xóa thành công!');
+            $request->session()->flash('alert-success', 'Sản phẩm đã được xóa thành công!');
             return back();
         } else {
-            $request->session()->flash('alert-danger', 'Thể loại xóa không thành công!');
+            $request->session()->flash('alert-danger', 'Sản phẩm xóa không thành công!');
             return back();
         }
     }

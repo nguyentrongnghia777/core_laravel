@@ -57,20 +57,16 @@
                             <input type="text" class="form-control" placeholder="Mô tả sản phẩm ..." name="product-description" value="{{ $product->description }}">
                         </div>
                         <div class="form-group">
-                            <label>Slug dùng cho SEO</label>
-                            <input type="text" class="form-control" placeholder="Slug dùng cho SEO ..." name="product-slug" value="{{ $product->slug }}">
-                        </div>
-                        <div class="form-group">
                             <label>Số lượng</label>
                             <input type="text" class="form-control" placeholder="Số lượng sản phẩm ..." name="product-quantity" value="{{ $product->quantity }}">
                         </div>
                         <div class="form-group">
-                            <label>Hình ảnh</label>
-                            <input type="file" class="form-control" placeholder="" name="product-images"><br />
-                            <img class="custom-image" src="{{asset('uploads/'.$product->images)}}">
+                            <label>Hình ảnh</label><br />
+                            <a href="#"><img class="custom-image-edit" src="{{asset('uploads/'.$product->images)}}"></a><br /><br/>
+                            <input type="file" class="form-control" placeholder="" name="product-images" style="width: 114px;">
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            <button type="submit" class="btn btn-primary" style="float: right;margin-right: 100px;padding: 5px 40px 5px 40px;">Lưu</button>
                         </div>
                     </form>
                 </div>
