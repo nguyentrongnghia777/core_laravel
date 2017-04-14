@@ -15,4 +15,7 @@ Class Constants {
 
     // paging page admin
     const ADMIN_DEFAULT_PAGING = 5;
+
+    // url blog image
+    const URL_IMAGE_BLOG = '/uploads/blog/';
 }

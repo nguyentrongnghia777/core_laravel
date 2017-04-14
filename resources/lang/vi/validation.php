@@ -116,7 +116,7 @@ return [
 
     'attributes'           => [
         'blog-name' => 'Tên bài viết',
-        'blog-avatar' => 'Hình đại diện bài viết',
+        'blog-image' => 'Hình đại diện bài viết',
     ],
 
 ];

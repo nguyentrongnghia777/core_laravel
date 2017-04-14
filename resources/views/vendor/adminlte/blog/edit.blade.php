@@ -54,8 +54,8 @@
                         </div>
                         <div class="form-group">
                             <label>Hình đại diện</label><br />
-                            <label id="upload" exist-img="{{ url('uploads').'/'.$blog->avatar_url }}">
-                                <input type="file" name="blog-avatar">
+                            <label id="upload" exist-img="{{ url('uploads/blog/').'/'.$blog->avatar_url }}">
+                                <input type="file" name="blog-image">
                             </label>
                         </div>
                         <div class="box-footer">

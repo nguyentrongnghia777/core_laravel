@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label>Hình đại diện</label><br />
                             <label id="upload">
-                                <input type="file" name="blog-avatar">
+                                <input type="file" name="blog-image">
                             </label>
                         </div>
                         <div class="box-footer">

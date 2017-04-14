@@ -69,7 +69,7 @@
                                         <?php $i++; ?>
                                         <tr role="row" class="{{ $i % 2 == 0 ? 'odd' : 'even' }}">
                                             <td class="">
-                                                <img src="{{ asset('uploads/'.$blog->avatar_url) }}" alt="" class="img-responsive blog-avatar">
+                                                <img src="{{ asset('uploads/blog/'.$blog->avatar_url) }}" alt="" class="img-responsive blog-avatar">
                                             </td>
                                             <td class="sorting_1">{{ $blog->name }}</td>
                                             <td class="">

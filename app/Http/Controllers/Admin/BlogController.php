@@ -13,8 +13,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Models\Dal\BlogCModel;
 use App\Http\Models\Dal\BlogQModel;
+use App\Http\Helpers\Constants;
+use App\Http\Helpers\ImageHelper;
 use Illuminate\Support\Facades\Input;
-use File;
 
 /**
  * Class BlogController
@@ -61,26 +62,26 @@ class BlogController extends Controller
         // Validate and store the blog...
         $this->validate($request, [
             'blog-name' => 'bail|required|min:3',
-            'blog-avatar' => 'image|mimes:jpeg,png,jpg,svg|required|max:3000'//Support dimension
+            'blog-image' => 'image|mimes:jpeg,png,jpg,svg|required|max:3000'//Support dimension
         ]);
 
         // Process upload image
         // Check file
-        if($request->hasFile('blog-avatar')){
-            $destination = 'uploads/';
-            $file = Input::file('blog-avatar');
-            $name = $file->getClientOriginalName();
+        if($request->hasFile('blog-image')){
+            $destination = public_path().Constants::URL_IMAGE_BLOG;
+            $file = Input::file('blog-image');
+            $blog_image = $file->getClientOriginalName();
 
             // Create item to insert db
             $blog = [
                 'user_id' => Auth::id(),
                 'name' => $_POST['blog-name'],
-                'avatar_url' => $name
+                'avatar_url' => $blog_image
             ];
             
             if (BlogCModel::insert_blog($blog)) {
                 //Move file to server
-                $file->move(public_path().'/'.$destination, $name);
+                ImageHelper::upload_image($file, $blog_image, $destination);
                 $request->session()->flash('alert-success', 'Bài viết đã được tạo thành công!');
                 return back();
             } else {
@@ -120,43 +121,51 @@ class BlogController extends Controller
         // Validate and store the blog...
         $this->validate($request, [
             'blog-name' => 'required|min:3',
-            'blog-avatar' => 'image|mimes:jpeg,png,jpg,svg|max:3000'//Support dimension
+            'blog-image' => 'image|mimes:jpeg,png,jpg,svg|max:3000'//Support dimension
         ]);
         
-
-        // Process upload image
-        $flag = FALSE;
         // Get blog
         $blog = BlogQModel::get_blog_by_id($blog_id);
-        $old_avatar = $blog->avatar_url;
-        // Check file
-        if($request->hasFile('blog-avatar')){
-            $flag = TRUE;
-            $destination = 'uploads/';
-            $file = Input::file('blog-avatar');
-            $name = $file->getClientOriginalName();
-        }
-        
-        // Create needed array to update to DB
-        $blog = [
-            'name' => $_POST['blog-name'],
-            'avatar_url' => ($flag == TRUE) ? $name : $old_avatar
-        ];
-        
-        if (BlogCModel::update_blog($blog_id, $blog)) {
-            if ($flag == TRUE) {
-                //Move file to server
-                $file->move(public_path().'/'.$destination, $name);
 
-                //Find old avatar file and delete it.
-                File::delete(public_path().'/'.$destination.'/'.$old_avatar);
+        // check blog == FALSE
+        if ($blog) {
+            // Create data_model to update to DB
+            $data_model = [
+                'name' => $_POST['blog-name'],
+            ];
+
+            // Process upload image
+            $image_uploaded = FALSE;
+
+            // Check file
+            if ($request->hasFile('blog-image')) {
+                $image_uploaded = TRUE;
+                $destination = public_path().Constants::URL_IMAGE_BLOG;
+                $file = Input::file('blog-image');
+                $new_blog_image = $file->getClientOriginalName();
+
+                // get old image of blog
+                $old_blog_image = $blog->avatar_url;
+
+                // add new image url to data_model
+                $data_model['avatar_url'] = $new_blog_image;
+                // array_push($data_model, ['avatar_url' => $new_blog_image])
             }
-            $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
-            return back();
-        } else {
-            $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
-            return back();
+            
+            if (BlogCModel::update_blog($blog_id, $data_model)) {
+                if ($image_uploaded == TRUE) {
+                    //update image
+                    ImageHelper::update_image($file, $old_blog_image, $new_blog_image, $destination);
+                }
+                $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
+                return back();
+            } else {
+                $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
+                return back();
+            }
         }
+        $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
+        return back();
     }
 
     /**
@@ -167,19 +176,24 @@ class BlogController extends Controller
      * @return Response
      */
     public function delete($blog_id, Request $request) {
-        $destination = 'uploads/';
+        $destination = public_path().Constants::URL_IMAGE_BLOG;
         // Get blog
         $blog = BlogQModel::get_blog_by_id($blog_id);
-        $old_avatar = $blog->avatar_url;
-        if (BlogCModel::delete_blog($blog_id)) {
-            //Find old avatar file and delete it.
-            File::delete(public_path().'/'.$destination.'/'.$old_avatar);
+        // check blog == FALSE
+        if ($blog) {
+            $old_image = $blog->avatar_url;
+            if (BlogCModel::delete_blog($blog_id)) {
+                //delete old image.
+                ImageHelper::delete_image($old_image, $destination);
 
-            $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
-            return back();
-        } else {
-            $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
-            return back();
+                $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
+                return back();
+            } else {
+                $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
+                return back();
+            }
         }
+        $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
+        return back();
     }
 }
