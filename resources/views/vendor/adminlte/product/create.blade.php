@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label>Giá</label>
-                            <input type="text" class="form-control" placeholder="Gái sản phẩm ..." name="product-price" value="{{ old('product-price') }}">
+                            <input type="text" class="form-control" placeholder="Giá sản phẩm ..." name="product-price" value="{{ old('product-price') }}">
                         </div>
                         <div class="form-group">
                             <label>Số lượng</label>

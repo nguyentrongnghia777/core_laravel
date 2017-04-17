@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Models\Dal\ProductCModel;
 use App\Http\Models\Dal\ProductQModel;;
 use Illuminate\Support\Facades\Input;
+use App\Http\Helpers\CommonHelpers;
 
 
 /**
@@ -73,19 +74,19 @@ class ProductController extends Controller
         $this->validate($request, [
             'product-name' => 'bail|required|min:5|max:20',
             'product-description' => 'required|min:5',
-            'product-price' => 'integer',
-            'product-quantity' => 'integer'
+            'product-price' => 'integer|min:0',
+            'product-quantity' => 'integer|min:0'
         ]);
 
 
         // Create item to insert db
+        $description = $_POST['product-description'];
+        $slug = $_POST['product-name'];
         $data = [
             'name' => $_POST['product-name'],
-            'description' => strip_tags($_POST['product-description'],'p'),
-            // remove <p></p> generate from CKEditor
+            'description' => CommonHelpers::strip_tags($description),
             'price' => $_POST['product-price'],
-            'slug' => str_slug($_POST['product-name']),
-            // Cover string to slug
+            'slug' => CommonHelpers::str_slug($slug),
             'quantity' => $_POST['product-quantity'],
             'images' => input::file('product-images')->getClientOriginalName()
         ];
