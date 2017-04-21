@@ -32,9 +32,21 @@ class UserController extends Controller
         $username = $request->username;
         $password = $request->password;
 
+        // check user
+
+        // get token
+        $token = md5($username + $password + time()) . '-' . base64_encode(time());
+
+        // save token
+
+        // $current_time = time();
+        // var_dump($date_start);
+        // return $date_start;
+
         return response(json_encode([
             'username' => $username,
             'password' => $password,
+            'token' => $token,
         ]), 200)->header('Content-Type', 'application/json');
     }
 }
