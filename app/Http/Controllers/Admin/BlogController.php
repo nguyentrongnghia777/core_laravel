@@ -15,6 +15,7 @@ use App\Http\Models\Dal\BlogCModel;
 use App\Http\Models\Dal\BlogQModel;
 use App\Http\Helpers\Constants;
 use App\Http\Helpers\ImageHelper;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Input;
 
 /**
@@ -62,7 +63,8 @@ class BlogController extends Controller
         // Validate and store the blog...
         $this->validate($request, [
             'blog-name' => 'bail|required|min:3',
-            'blog-image' => 'image|mimes:jpeg,png,jpg,svg|required|max:3000'//Support dimension
+            'blog-image' => 'image|mimes:jpeg,png,jpg,svg|required|max:3000',//Support dimension
+            'blog-content' => 'required|min:20'
         ]);
 
         // Process upload image
@@ -76,7 +78,8 @@ class BlogController extends Controller
             $blog = [
                 'user_id' => Auth::id(),
                 'name' => $_POST['blog-name'],
-                'avatar_url' => $blog_image
+                'content' => $_POST['blog-content'],
+                'image' => $blog_image
             ];
             
             if (BlogCModel::insert_blog($blog)) {
@@ -121,7 +124,8 @@ class BlogController extends Controller
         // Validate and store the blog...
         $this->validate($request, [
             'blog-name' => 'required|min:3',
-            'blog-image' => 'image|mimes:jpeg,png,jpg,svg|max:3000'//Support dimension
+            'blog-image' => 'image|mimes:jpeg,png,jpg,svg|max:3000',//Support dimension
+            'blog-content' => 'required|min:20'
         ]);
         
         // Get blog
@@ -142,20 +146,20 @@ class BlogController extends Controller
                 $image_uploaded = TRUE;
                 $destination = public_path().Constants::URL_IMAGE_BLOG;
                 $file = Input::file('blog-image');
-                $new_blog_image = $file->getClientOriginalName();
-
+                $new_blog_image_name = $file->getClientOriginalName();
+                $new_blog_image_name = ImageHelper::convert_image_name($new_blog_image_name, Constants::URL_IMAGE_BLOG);
                 // get old image of blog
-                $old_blog_image = $blog->avatar_url;
+                $old_blog_image_name = $blog->image;
 
                 // add new image url to data_model
-                $data_model['avatar_url'] = $new_blog_image;
-                // array_push($data_model, ['avatar_url' => $new_blog_image])
+                $data_model['image'] = $new_blog_image_name;
+                // array_push($data_model, ['avatar_url' => $new_blog_image_name])
             }
             
             if (BlogCModel::update_blog($blog_id, $data_model)) {
                 if ($image_uploaded == TRUE) {
                     //update image
-                    ImageHelper::update_image($file, $old_blog_image, $new_blog_image, $destination);
+                    ImageHelper::update_image($file, $old_blog_image_name, $new_blog_image_name, $destination);
                 }
                 $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
                 return back();
@@ -181,7 +185,7 @@ class BlogController extends Controller
         $blog = BlogQModel::get_blog_by_id($blog_id);
         // check blog == FALSE
         if ($blog) {
-            $old_image = $blog->avatar_url;
+            $old_image = $blog->image;
             if (BlogCModel::delete_blog($blog_id)) {
                 //delete old image.
                 ImageHelper::delete_image($old_image, $destination);

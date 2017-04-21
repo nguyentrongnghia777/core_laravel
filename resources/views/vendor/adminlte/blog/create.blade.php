@@ -54,8 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label>Nội dung bài viết</label>
-                            <textarea name="blog-body" id="" cols="30" rows="10"></textarea>
-                            <script type="text/javascript">ckeditor("blog-body");</script>
+                            <textarea name="blog-content" id="" cols="30" rows="10">{{ old('blog-content') }}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Hình đại diện</label><br />

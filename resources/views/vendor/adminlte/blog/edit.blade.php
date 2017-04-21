@@ -53,8 +53,12 @@
                             <input type="text" class="form-control" placeholder="Tên bài viết ..." name="blog-name" value="{{ $blog->name }}">
                         </div>
                         <div class="form-group">
+                            <label>Nội dung bài viết</label>
+                            <textarea name="blog-content" id="" cols="30" rows="10">{{ $blog->content }}</textarea>
+                        </div>
+                        <div class="form-group">
                             <label>Hình đại diện</label><br />
-                            <label id="upload" exist-img="{{ url('uploads/blog/').'/'.$blog->avatar_url }}">
+                            <label id="upload" exist-img="{{ $blog->image }}">
                                 <input type="file" name="blog-image">
                             </label>
                         </div>
