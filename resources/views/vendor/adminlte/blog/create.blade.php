@@ -53,6 +53,11 @@
                             <input type="text" class="form-control" placeholder="Tên bài viết ..." name="blog-name" value="{{ old('blog-name') }}">
                         </div>
                         <div class="form-group">
+                            <label>Nội dung bài viết</label>
+                            <textarea name="blog-body" id="" cols="30" rows="10"></textarea>
+                            <script type="text/javascript">ckeditor("blog-body");</script>
+                        </div>
+                        <div class="form-group">
                             <label>Hình đại diện</label><br />
                             <label id="upload">
                                 <input type="file" name="blog-image">

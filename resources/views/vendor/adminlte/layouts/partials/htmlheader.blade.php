@@ -11,6 +11,14 @@
     <link href="{{ asset('modules/LoadImg-master/css/loadimg.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/pages/home.css') }}" rel="stylesheet" type="text/css" />
 
+    <!-- CK Plugins Config -->
+    <script src="{{ asset('/modules/ckplugins/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/modules/ckplugins/ckfinder/ckfinder.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        var baseURL = "{{ url('/') }}";
+    </script>
+    <script src="{{ asset('/modules/ckplugins/func_ckfinder.js') }}" type="text/javascript"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
