@@ -5,6 +5,7 @@
 <script src="{{ mix('/js/app.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/modules/alertify/alertify.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/js/admin/home.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/js/admin/upload.js') }}" type="text/javascript"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the

@@ -45,7 +45,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form role="form" method="POST" action="{{ url('/admincp/product/store') }}" enctype="multipart/form-data">
+                    <form role="form" method="POST" action="{{ url('/admincp/product/update/'.$product->id) }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <!-- text input -->
                         <div class="form-group">
@@ -53,8 +53,8 @@
                             <input type="text" class="form-control" placeholder="Tên sản phẩm ..." name="product-name" value="{{ $product->name }}">
                         </div>
                         <div class="form-group">
-                            <label>Mô tả sản phẩm</label>
-                            <input type="text" class="form-control" placeholder="Mô tả sản phẩm ..." name="product-description" value="{{ $product->description }}">
+                            <label>Giá</label>
+                            <input type="text" class="form-control" placeholder="Giá sản phẩm ..." name="product-price" value="{{$product->price }}">
                         </div>
                         <div class="form-group">
                             <label>Số lượng</label>
@@ -62,8 +62,14 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh</label><br />
-                            <a href="#"><img class="custom-image-edit" src="{{asset('uploads/'.$product->images)}}"></a><br /><br/>
-                            <input type="file" class="form-control" placeholder="" name="product-images" style="width: 114px;">
+                            <img id="logo-img" onclick="document.getElementById('add-new-logo').click();" src="{{asset('uploads/'.$product->images)}}"/>
+                            <input type="file" style="display: none" id="add-new-logo" name="product-images" accept="image/*" onchange="addNewLogo(this)"/>
+<!-- <a href="#"><img class="custom-image-edit" src="{{asset('uploads/'.$product->images)}}"></a><br /><br/>
+<input type="file" class="form-control" placeholder="" name="product-images" style="width: 114px;"> -->
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả sản phẩm</label>
+                            <textarea class="ckeditor" name="product-description" cols="80" rows="10">{{ $product->description }}</textarea>
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary" style="float: right;margin-right: 100px;padding: 5px 40px 5px 40px;">Lưu</button>

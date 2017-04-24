@@ -15,6 +15,7 @@ use App\Http\Models\Dal\ProductCModel;
 use App\Http\Models\Dal\ProductQModel;;
 use Illuminate\Support\Facades\Input;
 use App\Http\Helpers\CommonHelpers;
+use File;
 
 
 /**
@@ -119,31 +120,54 @@ class ProductController extends Controller
     }
 
     /**
-     * Update a category.
+     * Update a product.
      *
      * @param id
      * @return Response
      */
     public function update($id, Request $request) {
-        // Validate and store the blog...
+
+        //Validate and store the products...
         $this->validate($request, [
-            'category-name' => 'required|min:3',
-            'category-description' => 'required'
+            'product-name' => 'bail|required|min:5|max:20',
+            'product-description' => 'required|min:5',
+            'product-price' => 'integer|min:0',
+            'product-quantity' => 'integer|min:0'
         ]);
 
-        // Create needed array to update to DB
+        // Create variable
+        $description = $_POST['product-description'];
+        $space = $_POST['product-price'];
+        $slug = $_POST['product-name'];
+        $product = ProductQModel::get_product_by_id($id);
+        $img_old='uploads/' . $product->images;
+        $img_new = Input::file('product-images');
+
+        // Create array input data
         $data = [
-            'name' => $_POST['category-name'],
-            'description' => $_POST['category-description']
+            'name' => $_POST['product-name'],
+            'description' => CommonHelpers::strip_tags($description),
+            'price' => CommonHelpers::str_replace($space),
+            'slug' => CommonHelpers::str_slug($slug),
+            'quantity' => $_POST['product-quantity'],
         ];
 
-        if (CategoryCModel::update_category($id, $data)) {
-            $request->session()->flash('alert-success', 'Thể loại đã được cập nhật thành công!');
+        // Handling images in here
+        if(!empty($img_new)){ 
+            $data['images'] = $img_new->getClientOriginalName();
+            $img_new->move('uploads/',$img_new->getClientOriginalName());
+            if(File::exists($img_old)){
+                File::delete($img_old);
+            }
+        }
+        // Update data
+        if (ProductCModel::update_product($id, $data)) {
+            $request->session()->flash('alert-success', 'Sản phẩm đã được sửa thành công!');
             return back();
         } else {
-            $request->session()->flash('alert-danger', 'Thể loại cập nhật không thành công!');
+            $request->session()->flash('alert-danger', 'Sản phẩm sửa không thành công!');
             return back();
-        }
+        } 
     }
 
     /**

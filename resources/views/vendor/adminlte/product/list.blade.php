@@ -81,7 +81,7 @@
                                             <td class="sorting_1">{{ $items->id }}</td>
                                             <td class="sorting_1 "><img class="custom-image" src="{{asset('uploads/'.$items->images)}}"></td>
                                             <td class="sorting_1">{{ $items->name }}</td>
-                                            <td class="sorting_1 ">{{ number_format($items->price) }}<span> Đ</span></td>
+                                            <td class="sorting_1 ">{{ number_format($items->price) }}<span> VNĐ</span></td>
                                             <td class="sorting_1">{{ $items->quantity }}</td>             
                                             <td class="">
                                                 <a href="{{ url('/admincp/product/edit/'.$items->id) }}" class="btn-edit " title="Sửa">

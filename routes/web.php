@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/create', 'Admin\ProductController@create');
             Route::post('/store', 'Admin\ProductController@store');
             Route::get('/edit/{id}', 'Admin\ProductController@edit');
+             Route::post('/update/{id}', 'Admin\ProductController@update');
              Route::get('/delete/{id}', 'Admin\ProductController@delete');
         });
     });

@@ -18,13 +18,13 @@ class ProductCModel extends Model
     }
 
     /**
-     * update category
+     * update product
      * @param id
      * @param array data
      * @return boolean
      */
-    public static function update_category($id, $data) {
-        return DB::table(Constants::CATEGORIES)
+    public static function update_product($id, $data) {
+        return DB::table(Constants::PRODUCTS)
                 ->where('id', $id)
                 ->update($data);
     }

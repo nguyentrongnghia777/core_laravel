@@ -21,4 +21,14 @@ class CommonHelpers {
 	{
 		return strip_tags($description,'p');
 	}
+
+	/*
+	* Remove ',' in string
+	* @param $space
+	* @return object
+	*/
+	static function str_replace($space)
+	{
+		return trim(str_replace(',','',$space));
+	}
 }
