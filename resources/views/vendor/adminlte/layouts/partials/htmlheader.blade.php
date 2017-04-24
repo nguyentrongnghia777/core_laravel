@@ -8,6 +8,7 @@
     <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('modules/alertify/alertify.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('modules/alertify/default.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('modules/LoadImg-master/css/loadimg.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/pages/home.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -22,7 +22,6 @@
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if(Session::has('alert-' . $msg))
-            <?php //var_dump(session()->all()); ?>
             <h4 class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}  <button class="close" data-dismiss="alert" aria-label="close">&times;</button></h4>
             @endif
         @endforeach
@@ -46,12 +45,22 @@
                             </ul>
                         </div>
                     @endif
-                    <form role="form" method="POST" action="{{ url('/admincp/blog/update/'. $blog->id) }}">
+                    <form role="form" method="POST" enctype="multipart/form-data" action="{{ url('/admincp/blog/update/'. $blog->id) }}">
                         {{ csrf_field() }}
                         <!-- text input -->
                         <div class="form-group">
                             <label>Tên bài viết</label>
                             <input type="text" class="form-control" placeholder="Tên bài viết ..." name="blog-name" value="{{ $blog->name }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Nội dung bài viết</label>
+                            <textarea name="blog-content" id="" cols="30" rows="10">{{ $blog->content }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Hình đại diện</label><br />
+                            <label id="upload" exist-img="{{ $blog->image }}">
+                                <input type="file" name="blog-image">
+                            </label>
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">Lưu</button>

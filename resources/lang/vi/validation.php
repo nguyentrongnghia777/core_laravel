@@ -117,7 +117,9 @@ return [
     'attributes'           => [
         'blog-name' => 'Tên bài viết',
         'category-name' => 'Tên thể loại',
-        'category-description' => 'Mô tả thể loại'
+        'category-description' => 'Mô tả thể loại',
+        'blog-image' => 'Hình đại diện bài viết',
+        'blog-content' => 'Nội dung bài viết',
     ],
 
 ];
