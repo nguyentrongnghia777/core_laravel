@@ -69,31 +69,31 @@ class BlogController extends Controller
 
         // Process upload image
         // Check file
-        if($request->hasFile('blog-image')){
-            $file = Input::file('blog-image');
-            $blog_image_name = ImageHelper::convert_image_name($file->getClientOriginalName());
-
-            // Create item to insert db
-            $blog = [
-                'user_id' => Auth::id(),
-                'name' => $_POST['blog-name'],
-                'content' => $_POST['blog-content'],
-                'image' => Constants::URL_IMAGE_BLOG . $blog_image_name
-            ];
-            
-            if (BlogCModel::insert_blog($blog)) {
-                //Move file to server
-                ImageHelper::upload_image($file, $blog_image_name, Constants::URL_IMAGE_BLOG);
-                $request->session()->flash('alert-success', 'Bài viết đã được tạo thành công!');
-                return back();
-            } else {
-                $request->session()->flash('alert-danger', 'Bài viết tạo không thành công!');
-                return back();
-            }
-
+        if (!$request->hasFile('blog-image')) {
+            $request->session()->flash('alert-danger', 'Bài viết tạo không thành công!');
+            return back();
         }
-        $request->session()->flash('alert-danger', 'Bài viết tạo không thành công!');
-        return back();
+
+        $file = Input::file('blog-image');
+        $blog_image_name = ImageHelper::convert_image_name($file->getClientOriginalName());
+
+        // Create item to insert db
+        $blog = [
+            'user_id' => Auth::id(),
+            'name' => $_POST['blog-name'],
+            'content' => $_POST['blog-content'],
+            'image' => Constants::URL_IMAGE_BLOG . $blog_image_name
+        ];
+        
+        if (BlogCModel::insert_blog($blog)) {
+            //Move file to server
+            ImageHelper::upload_image($file, $blog_image_name, Constants::URL_IMAGE_BLOG);
+            $request->session()->flash('alert-success', 'Bài viết đã được tạo thành công!');
+            return back();
+        } else {
+            $request->session()->flash('alert-danger', 'Bài viết tạo không thành công!');
+            return back();
+        }
     }
 
     /**
@@ -131,42 +131,43 @@ class BlogController extends Controller
         $blog = BlogQModel::get_blog_by_id($blog_id);
 
         // check blog == FALSE
-        if ($blog) {
-            // Create data_model to update to DB
-            $data_model = [
-                'name' => $_POST['blog-name'],
-            ];
-
-            // Process upload image
-            $image_uploaded = FALSE;
-
-            // Check file
-            if ($request->hasFile('blog-image')) {
-                $image_uploaded = TRUE;
-                $file = Input::file('blog-image');
-                $new_blog_image_name = ImageHelper::convert_image_name($file->getClientOriginalName());
-
-                // add new image url to data_model
-                $data_model['image'] = Constants::URL_IMAGE_BLOG . $new_blog_image_name;
-            }
-            
-            if (BlogCModel::update_blog($blog_id, $data_model)) {
-                if ($image_uploaded == TRUE) {
-                    //upload new image
-                    ImageHelper::upload_image($file, $new_blog_image_name, Constants::URL_IMAGE_BLOG);
-                    //delete old image
-                    ImageHelper::delete_image($blog->image);
-                }
-
-                $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
-                return back();
-            } else {
-                $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
-                return back();
-            }
+        if (!$blog) {
+            $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
+            return back();
         }
-        $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
-        return back();
+
+        // Create data_model to update to DB
+        $data_model = [
+            'name' => $_POST['blog-name'],
+        ];
+
+        // Process upload image
+        $image_uploaded = FALSE;
+
+        // Check file
+        if ($request->hasFile('blog-image')) {
+            $image_uploaded = TRUE;
+            $file = Input::file('blog-image');
+            $new_blog_image_name = ImageHelper::convert_image_name($file->getClientOriginalName());
+
+            // add new image url to data_model
+            $data_model['image'] = Constants::URL_IMAGE_BLOG . $new_blog_image_name;
+        }
+        
+        if (BlogCModel::update_blog($blog_id, $data_model)) {
+            if ($image_uploaded == TRUE) {
+                //upload new image
+                ImageHelper::upload_image($file, $new_blog_image_name, Constants::URL_IMAGE_BLOG);
+                //delete old image
+                ImageHelper::delete_image($blog->image);
+            }
+
+            $request->session()->flash('alert-success', 'Bài viết đã được cập nhật thành công!');
+            return back();
+        } else {
+            $request->session()->flash('alert-danger', 'Bài viết cập nhật không thành công!');
+            return back();
+        }
     }
 
     /**
@@ -180,20 +181,21 @@ class BlogController extends Controller
         // Get blog
         $blog = BlogQModel::get_blog_by_id($blog_id);
         // check blog = FALSE
-        if ($blog) {
-            $old_image_url = $blog->image;
-            if (BlogCModel::delete_blog($blog_id)) {
-                //delete old image.
-                ImageHelper::delete_image($old_image_url);
-
-                $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
-                return back();
-            } else {
-                $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
-                return back();
-            }
+        if (!$blog) {
+            $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
+            return back();
         }
-        $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
-        return back();
+
+        $old_image_url = $blog->image;
+        if (BlogCModel::delete_blog($blog_id)) {
+            //delete old image.
+            ImageHelper::delete_image($old_image_url);
+
+            $request->session()->flash('alert-success', 'Bài viết đã được xóa thành công!');
+            return back();
+        } else {
+            $request->session()->flash('alert-danger', 'Bài viết xóa không thành công!');
+            return back();
+        }    
     }
 }
