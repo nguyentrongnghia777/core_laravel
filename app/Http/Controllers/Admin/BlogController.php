@@ -73,6 +73,7 @@ class BlogController extends Controller
             $destination = public_path().Constants::URL_IMAGE_BLOG;
             $file = Input::file('blog-image');
             $blog_image = $file->getClientOriginalName();
+            $blog_image = ImageHelper::convert_image_name($blog_image, Constants::URL_IMAGE_BLOG);
 
             // Create item to insert db
             $blog = [
@@ -153,7 +154,6 @@ class BlogController extends Controller
 
                 // add new image url to data_model
                 $data_model['image'] = $new_blog_image_name;
-                // array_push($data_model, ['avatar_url' => $new_blog_image_name])
             }
             
             if (BlogCModel::update_blog($blog_id, $data_model)) {
@@ -183,7 +183,7 @@ class BlogController extends Controller
         $destination = public_path().Constants::URL_IMAGE_BLOG;
         // Get blog
         $blog = BlogQModel::get_blog_by_id($blog_id);
-        // check blog == FALSE
+        // check blog = FALSE
         if ($blog) {
             $old_image = $blog->image;
             if (BlogCModel::delete_blog($blog_id)) {

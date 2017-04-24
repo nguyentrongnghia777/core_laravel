@@ -21,22 +21,21 @@ Class ImageHelper {
     /**
      * update image
      * @param file
-     * @param old image name
-     * @param new image name
+     * @param old image url
+     * @param new image url
      * @param destination
      * @return boolean
      */
-    public static function update_image($file, $old_image_url, $new_image_name, $destination) {
+    public static function update_image($file, $old_image_url, $new_image_url, $destination) {
         //Move file to server
-        $file->move($destination, $new_image_name);
+        $file->move($destination, $new_image_url);
         //Find old image file and delete it.
         self::delete_image($old_image_url);
     }
 
     /**
      * delete image
-     * @param old image name
-     * @param destination
+     * @param image url
      * @return boolean
      */
     public static function delete_image($image_url) {
@@ -47,7 +46,8 @@ Class ImageHelper {
 
     /**
      * Convert Image name to store to db
-     * @param string
+     * @param image
+     * @param destination
      * @return string
      */
     public static function convert_image_name($image, $destination) {
