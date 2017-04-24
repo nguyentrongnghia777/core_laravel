@@ -69,7 +69,7 @@ class BlogController extends Controller
 
         // Process upload image
         // Check file
-        if($request->hasFile('blog-image')){
+        if ($request->hasFile('blog-image')) {
             $file = Input::file('blog-image');
             $blog_image_name = ImageHelper::convert_image_name($file->getClientOriginalName());
 
