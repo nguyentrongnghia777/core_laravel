@@ -21,7 +21,7 @@ Class ImageHelper {
 
     /**
      * delete image
-     * @param image url
+     * @param string image_url
      * @return boolean
      */
     public static function delete_image($image_url) {
