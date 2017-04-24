@@ -9,28 +9,14 @@ Class ImageHelper {
     /**
      * upload image
      * @param file
-     * @param image name
-     * @param destination
+     * @param image_name
+     * @param string destination (ex: /uploads/blog/)
      * @return boolean
      */
     public static function upload_image($file, $image_name, $destination) {
         //Move file to server
-        $file->move($destination, $image_name);
-    }
+        $file->move(public_path() . $destination, $image_name);
 
-    /**
-     * update image
-     * @param file
-     * @param old image url
-     * @param new image url
-     * @param destination
-     * @return boolean
-     */
-    public static function update_image($file, $old_image_url, $new_image_url, $destination) {
-        //Move file to server
-        $file->move($destination, $new_image_url);
-        //Find old image file and delete it.
-        self::delete_image($old_image_url);
     }
 
     /**
@@ -39,22 +25,20 @@ Class ImageHelper {
      * @return boolean
      */
     public static function delete_image($image_url) {
-        $image_url = public_path().str_replace(url('/'), "", $image_url);
         //Find old image file and delete it.
-        File::delete($image_url);
+        File::delete(public_path() . $image_url);
     }
 
     /**
      * Convert Image name to store to db
-     * @param image
-     * @param destination
+     * @param string image_name
      * @return string
      */
-    public static function convert_image_name($image, $destination) {
-        $filename = pathinfo($image, PATHINFO_FILENAME);
-        $extension = ".".pathinfo($image, PATHINFO_EXTENSION);
-        $image_url = ConvertStringHelper::convert_vn_to_str($filename)."_".time();
-        $image_url = url('/').$destination.$image_url.$extension;
-        return $image_url;
+    public static function convert_image_name($image_name) {
+        $filename = pathinfo($image_name, PATHINFO_FILENAME);
+        $extension = "." . pathinfo($image_name, PATHINFO_EXTENSION);
+        $image_name = ConvertStringHelper::convert_vn_to_str($filename) . "_" . time() . $extension;
+        
+        return $image_name;
     }
 }
