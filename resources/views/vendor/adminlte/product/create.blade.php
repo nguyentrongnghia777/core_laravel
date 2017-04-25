@@ -12,7 +12,7 @@
 
 @section('contentheader_levels')
     <li><a href="{{ url('/admincp') }}"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
-    <li><a href="{{ url('/admincp/category') }}">Quản lý sản phẩm</a></li>
+    <li><a href="{{ url('/admincp/product') }}">Quản lý sản phẩm</a></li>
     <li class="active">Tạo mới sản phẩm</li>
 @endsection
 

@@ -136,7 +136,6 @@ class ProductController extends Controller
         ]);
 
         // Create variable
-        $description = $_POST['product-description'];
         $space = $_POST['product-price'];
         $slug = $_POST['product-name'];
         $product = ProductQModel::get_product_by_id($id);
@@ -146,14 +145,14 @@ class ProductController extends Controller
         // Create array input data
         $data = [
             'name' => $_POST['product-name'],
-            'description' => CommonHelpers::strip_tags($description),
+            'description' => $_POST['product-description'],
             'price' => CommonHelpers::str_replace($space),
             'slug' => CommonHelpers::str_slug($slug),
             'quantity' => $_POST['product-quantity'],
         ];
 
         // Handling images in here
-        if(!empty($img_new)){ 
+        if (!empty($img_new)) { 
             $data['images'] = $img_new->getClientOriginalName();
             $img_new->move('uploads/',$img_new->getClientOriginalName());
             if(File::exists($img_old)){
