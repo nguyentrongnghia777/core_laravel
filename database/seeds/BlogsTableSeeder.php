@@ -16,7 +16,9 @@ class BlogsTableSeeder extends Seeder
         for ($i = 1; $i < 20; $i++) {
             array_push($data, [
                 'name' => 'bai ' . $i,
-                'user_id' => 1,
+                'image' => 'test',
+                'content' => 'abc',
+                'user_id' => 1
             ]);
         }
 

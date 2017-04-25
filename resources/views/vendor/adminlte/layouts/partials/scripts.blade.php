@@ -4,6 +4,8 @@
 <!-- Laravel App -->
 <script src="{{ mix('/js/app.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/modules/alertify/alertify.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/modules/LoadImg-master/js/jquery.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/modules/LoadImg-master/js/loadimg.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/js/admin/home.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/js/admin/upload.js') }}" type="text/javascript"></script>
 
@@ -16,3 +18,11 @@
         'csrfToken' => csrf_token(),
     ]) !!};
 </script>
+<script type="text/javascript">
+		$('#upload').loadImg({
+			"text"			: "Chọn hình đại diện ...",
+			"fileExt"		: ["png","jpg"],
+			"fileSize_min"	: 0,
+			"fileSize_max"	: 2
+		});
+	</script>
