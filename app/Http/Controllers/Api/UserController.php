@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Helpers\ResponseHelper;
 
 /**
  * Class UserController
@@ -42,11 +43,13 @@ class UserController extends Controller
         // $current_time = time();
         // var_dump($date_start);
         // return $date_start;
-
-        return response(json_encode([
+        $data = [
             'username' => $username,
             'password' => $password,
             'token' => $token,
-        ]), 200)->header('Content-Type', 'application/json');
+        ];
+
+        // return ResponseHelper::success((object)$data, 200);
+        return ResponseHelper::error(ResponseHelper::NOT_FOUND, ['not found'], 400);
     }
 }
