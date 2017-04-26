@@ -7,7 +7,6 @@
 <script src="{{ asset('/modules/LoadImg-master/js/jquery.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/modules/LoadImg-master/js/loadimg.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/js/admin/home.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/js/admin/upload.js') }}" type="text/javascript"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
@@ -19,10 +18,16 @@
     ]) !!};
 </script>
 <script type="text/javascript">
-		$('#upload').loadImg({
-			"text"			: "Chọn hình đại diện ...",
-			"fileExt"		: ["png","jpg"],
-			"fileSize_min"	: 0,
-			"fileSize_max"	: 2
-		});
-	</script>
+	$('#upload').loadImg({
+		"text"			: "Chọn hình đại diện ...",
+		"fileExt"		: ["png","jpg"],
+		"fileSize_min"	: 0,
+		"fileSize_max"	: 2
+	});
+	$('#upload_product_image').loadImg({
+		"text"			: "Chọn hình sản phẩm...",
+		"fileExt"		: ["png","jpg"],
+		"fileSize_min"	: 0,
+		"fileSize_max"	: 2
+	});
+</script>

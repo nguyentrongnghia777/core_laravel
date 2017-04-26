@@ -83,13 +83,13 @@ a {
     background-repeat: no-repeat;
 }
 
-#upload {
+#upload, #upload_product_image {
   position: relative;
   margin: 0;
   /*max-width: 50%;*/
 }
 
-#upload img {
+#upload img, #upload_product_image img {
     max-width: 30%;
     min-width: 20%;
 }

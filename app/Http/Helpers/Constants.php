@@ -20,4 +20,7 @@ Class Constants {
 
     // url blog image
     const URL_IMAGE_BLOG = '/uploads/blog/';
+
+    // url product image
+    const URL_IMAGE_PRODUCT = '/uploads/product/';
 }

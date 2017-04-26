@@ -62,7 +62,9 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh</label>
-                            <input type="file" class="form-control" placeholder="" name="product-images">
+                            <label id="upload_product_image">
+                                <input type="file" class="form-control" placeholder="" name="product-images">
+                            </label>
                         </div>
                         <div class="form-group">
                             <label>Mô tả sản phẩm</label>

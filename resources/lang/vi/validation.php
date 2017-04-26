@@ -121,8 +121,9 @@ return [
 
         'product-name' => 'Tên sản phẩm',
         'product-description' => 'Mô tả sản phẩm',
-        'product-price' => 'Giá sản phẩm',
-        'product-quantity' => 'Số lượng sản phẩm',
+        'product-price' => 'Giá',
+        'product-quantity' => 'Số lượng',
+        'product-images' => 'Hình ảnh',
 
         'blog-image' => 'Hình đại diện bài viết',
         'blog-content' => 'Nội dung bài viết',

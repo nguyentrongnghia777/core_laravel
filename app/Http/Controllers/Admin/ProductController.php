@@ -15,6 +15,8 @@ use App\Http\Models\Dal\ProductCModel;
 use App\Http\Models\Dal\ProductQModel;;
 use Illuminate\Support\Facades\Input;
 use App\Http\Helpers\CommonHelpers;
+use App\Http\Helpers\Constants;
+use App\Http\Helpers\ImageHelper;
 use File;
 
 
@@ -74,27 +76,37 @@ class ProductController extends Controller
         // Validate and store the categories...
         $this->validate($request, [
             'product-name' => 'bail|required|min:5|max:20',
-            'product-description' => 'required|min:5',
             'product-price' => 'integer|min:0',
-            'product-quantity' => 'integer|min:0'
+            'product-quantity' => 'integer|min:0',
+            'product-images' => 'image|mimes:jpeg,png,jpg,svg|required|max:3000',//Support dimension,
+            'product-description' => 'required|min:5'
         ]);
 
+        // Process upload image
+        // Check file
+        if (!$request->hasFile('product-images')) {
+            $request->session()->flash('alert-danger', 'Sản phẩm tạo không thành công!');
+            return back();
+        }
+
+        $file = Input::file('product-images');
+        $product_image_name = ImageHelper::convert_image_name($file->getClientOriginalName());
 
         // Create item to insert db
-        $description = $_POST['product-description'];
-        $slug = $_POST['product-name'];
         $data = [
             'name' => $_POST['product-name'],
-            'description' => CommonHelpers::strip_tags($description),
+            'description' => $_POST['product-description'],
             'price' => $_POST['product-price'],
-            'slug' => CommonHelpers::str_slug($slug),
+            'slug' => str_slug($_POST['product-name']),
             'quantity' => $_POST['product-quantity'],
-            'images' => input::file('product-images')->getClientOriginalName()
+            'images' => Constants::URL_IMAGE_PRODUCT . $product_image_name
         ];
 
-        input::file('product-images')->move('uploads/',input::file('product-images')->getClientOriginalName());
+        // input::file('product-images')->move('uploads/',input::file('product-images')->getClientOriginalName());
         
         if (ProductCModel::insert_product($data)) {
+            //Move file to server
+            ImageHelper::upload_image($file, $product_image_name, Constants::URL_IMAGE_PRODUCT);
             $request->session()->flash('alert-success', 'Sản phẩm đã được tạo thành công!');
             return back();
         } else {
@@ -122,10 +134,10 @@ class ProductController extends Controller
     /**
      * Update a product.
      *
-     * @param id
+     * @param product_id
      * @return Response
      */
-    public function update($id, Request $request) {
+    public function update($product_id, Request $request) {
 
         //Validate and store the products...
         $this->validate($request, [
@@ -135,33 +147,47 @@ class ProductController extends Controller
             'product-quantity' => 'integer|min:0'
         ]);
 
-        // Create variable
-        $space = $_POST['product-price'];
-        $slug = $_POST['product-name'];
-        $product = ProductQModel::get_product_by_id($id);
-        $img_old='uploads/' . $product->images;
-        $img_new = Input::file('product-images');
+        // Get product
+        $product = ProductQModel::get_product_by_id($product_id);
 
-        // Create array input data
-        $data = [
+        // check product == FALSE
+        if (!$product) {
+            $request->session()->flash('alert-danger', 'Sản phẩm cập nhật không thành công!');
+            return back();
+        }
+
+        // Create data_model to update to DB
+        $data_model = [
             'name' => $_POST['product-name'],
             'description' => $_POST['product-description'],
-            'price' => CommonHelpers::str_replace($space),
-            'slug' => CommonHelpers::str_slug($slug),
+            'price' => $_POST['product-price'],
+            'slug' => str_slug($_POST['product-name']),
             'quantity' => $_POST['product-quantity'],
         ];
+        
+        // Process upload image
+        $image_uploaded = FALSE;
 
-        // Handling images in here
-        if (!empty($img_new)) { 
-            $data['images'] = $img_new->getClientOriginalName();
-            $img_new->move('uploads/',$img_new->getClientOriginalName());
-            if(File::exists($img_old)){
-                File::delete($img_old);
-            }
+        // Check file
+        if ($request->hasFile('product-images')) {
+            $image_uploaded = TRUE;
+            $file = Input::file('product-images');
+            $new_product_image_name = ImageHelper::convert_image_name($file->getClientOriginalName());
+
+            // add new image url to data_model
+            $data_model['images'] = Constants::URL_IMAGE_PRODUCT . $new_product_image_name;
         }
+        
         // Update data
-        if (ProductCModel::update_product($id, $data)) {
-            $request->session()->flash('alert-success', 'Sản phẩm đã được sửa thành công!');
+        if (ProductCModel::update_product($product_id, $data_model)) {
+            if ($image_uploaded == TRUE) {
+                //upload new image
+                ImageHelper::upload_image($file, $new_product_image_name, Constants::URL_IMAGE_PRODUCT);
+                //delete old image
+                ImageHelper::delete_image($product->images);
+            }
+
+            $request->session()->flash('alert-success', 'Sản phẩm đã được cập nhật thành công!');
             return back();
         } else {
             $request->session()->flash('alert-danger', 'Sản phẩm sửa không thành công!');
@@ -172,12 +198,25 @@ class ProductController extends Controller
     /**
      * Delete a product.
      *
-     * @param id
+     * @param product_id
      * @param Request $request
      * @return Response
      */
-    public function delete($id, Request $request) {
-        if (ProductCModel::delete_product($id)) {
+    public function delete($product_id, Request $request) {
+        // Get product
+        $product = ProductQModel::get_product_by_id($product_id);
+
+        // check product = FALSE
+        if (!$product) {
+            $request->session()->flash('alert-danger', 'Sản phẩm xóa không thành công!');
+            return back();
+        }
+
+        $old_image_url = $product->images;
+        if (ProductCModel::delete_product($product_id)) {
+            //delete old image.
+            ImageHelper::delete_image($old_image_url);
+
             $request->session()->flash('alert-success', 'Sản phẩm đã được xóa thành công!');
             return back();
         } else {

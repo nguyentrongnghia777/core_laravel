@@ -62,10 +62,9 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh</label><br />
-                            <img id="logo-img" onclick="document.getElementById('add-new-logo').click();" src="{{asset('uploads/'.$product->images)}}"/>
-                            <input type="file" style="display: none" id="add-new-logo" name="product-images" accept="image/*" onchange="addNewLogo(this)"/>
-<!-- <a href="#"><img class="custom-image-edit" src="{{asset('uploads/'.$product->images)}}"></a><br /><br/>
-<input type="file" class="form-control" placeholder="" name="product-images" style="width: 114px;"> -->
+                            <label id="upload" exist-img="{{ $product->images }}">
+                                <input type="file" name="product-images">
+                            </label>
                         </div>
                         <div class="form-group">
                             <label>Mô tả sản phẩm</label>

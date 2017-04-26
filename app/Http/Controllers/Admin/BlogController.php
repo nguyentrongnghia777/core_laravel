@@ -120,6 +120,7 @@ class BlogController extends Controller
      * @return Response
      */
     public function update($blog_id, Request $request) {
+
         // Validate and store the blog...
         $this->validate($request, [
             'blog-name' => 'required|min:3',
@@ -154,6 +155,7 @@ class BlogController extends Controller
             $data_model['image'] = Constants::URL_IMAGE_BLOG . $new_blog_image_name;
         }
         
+        // Update data
         if (BlogCModel::update_blog($blog_id, $data_model)) {
             if ($image_uploaded == TRUE) {
                 //upload new image
@@ -171,7 +173,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Delete a blog blog.
+     * Delete a blog.
      *
      * @param blog_id
      * @param Request $request

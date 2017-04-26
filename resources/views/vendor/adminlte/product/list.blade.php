@@ -20,7 +20,6 @@
 <div class="container-fluid spark-screen">
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg) @if(Session::has('alert-' . $msg))
-        <?php //var_dump(session()->all()); ?>
         <h4 class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}  <button class="close" data-dismiss="alert" aria-label="close">&times;</button></h4> @endif @endforeach
     </div>
     <!-- end .flash-message -->
@@ -79,7 +78,8 @@
                                         <?php $i++; ?>
                                         <tr role="row" class="{{ $i % 2 == 0 ? 'odd' : 'even' }}">
                                             <td class="sorting_1">{{ $items->id }}</td>
-                                            <td class="sorting_1 "><img class="custom-image" src="{{asset('uploads/'.$items->images)}}"></td>
+                                            <td class="sorting_1 ">
+                                                <img class="custom-image" src="{{ $items->images }}"></td>
                                             <td class="sorting_1">{{ $items->name }}</td>
                                             <td class="sorting_1 ">{{ number_format($items->price) }}<span> VNĐ</span></td>
                                             <td class="sorting_1">{{ $items->quantity }}</td>             
