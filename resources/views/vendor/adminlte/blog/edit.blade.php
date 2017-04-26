@@ -54,7 +54,8 @@
                         </div>
                         <div class="form-group">
                             <label>Nội dung bài viết</label>
-                            <textarea name="blog-content" id="" cols="30" rows="10">{{ $blog->content }}</textarea>
+                            <textarea class="ckeditor" name="blog-content" cols="80" rows="10">
+                            {{ $blog->content }}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Hình đại diện</label><br />
