@@ -41,9 +41,9 @@ class ProductController extends Controller
      * @return Response
      */
     public function index(Request $request) {
-        //Get and search Categories
-        if(isset($_POST['search-category'])) {
-            $search = $_POST['search-category'];
+        //Get and search Products
+        if(isset($_POST['search-product'])) {
+            $search = $_POST['search-product'];
         } else {
             $search = '';
         }
