@@ -21,7 +21,12 @@ Class ResponseHelper {
     */
 
     // error type
-    const NOT_FOUND = 'NOT_FOUND';
+    const NOT_FOUND = 'NotFound';
+    const UNKNOWN = 'UnKnow';
+
+    // error type user
+    const USERNAME_PASSWORD_REQUIRE = 'UsernamePasswordRequire';
+    const USERNAME_PASSWORD_INCORRECT = 'UsernamePasswordIncorrect';
 
     /**
      * convert response success for api
@@ -29,7 +34,7 @@ Class ResponseHelper {
      * @param int $status_code
      * @return json object
      */
-    public static function success($data = null, $status_code) {
+    public static function success($data = null, $status_code = 200) {
         return response(json_encode([
             'data' => $data,
         ]), $status_code)->header('Content-Type', 'application/json');
@@ -42,7 +47,7 @@ Class ResponseHelper {
      * @param int $status_code
      * @return json object
      */
-    public static function error($error_type = NOT_FOUND, $error_message = [], $status_code) {
+    public static function error($error_type = self::UNKNOWN, $error_message = [], $status_code = 500) {
         return response(json_encode([
             'meta' => (object) [
                 "error_type" => $error_type,

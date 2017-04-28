@@ -25,4 +25,17 @@ class UserModel extends Authenticatable
 
         return FALSE;
     }
+
+    /**
+     * check user is admin by id
+     * @param id
+     * @return boolean
+     */
+    public static function app_login($username, $password, $device = null, $type_device = null) {
+        if (!UserQModel::get_user_by_username_password()) {
+            return FALSE;
+        }
+
+        return TRUE;
+    }
 }

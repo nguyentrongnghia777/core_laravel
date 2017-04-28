@@ -20,4 +20,14 @@ class UserQModel extends Model
                 ->where('ug.user_id', '=', $id)
                 ->get();
     }
+
+    /**
+     * get role user by id
+     * @param $username
+     * @param $password (md5)
+     * @return array role user
+     */
+    public static function get_user_by_username_password($username, $password) {
+
+    }
 }

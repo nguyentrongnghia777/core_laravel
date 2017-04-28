@@ -14,6 +14,12 @@ Class Constants {
     const ROLES_ADMIN = 'admin';
     const ROLES_MEMBER = 'member';
 
+    // type_device
+    const ANDROID = 'android';
+    const IOS = 'ios';
+    const WINDOWS_PHONE = 'windows_phone';
+    const UNKNOW = 'unknow';
+
     // paging page admin
     const ADMIN_DEFAULT_PAGING = 5;
 }
