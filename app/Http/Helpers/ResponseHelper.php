@@ -23,6 +23,7 @@ Class ResponseHelper {
     // error type
     const NOT_FOUND = 'NotFound';
     const UNKNOWN = 'UnKnow';
+    const SERVER_ERROR = 'ServerError';
 
     // error type user
     const USERNAME_PASSWORD_REQUIRE = 'UsernamePasswordRequire';

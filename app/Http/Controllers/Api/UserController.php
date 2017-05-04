@@ -44,31 +44,36 @@ class UserController extends Controller
                 400
             );
         }
-        
+
         // check user login
-        if (!UserModel::app_login($username, $password, $device, $type_device)) {
+        $user = UserModel::app_login($username, $password);
+        if (!$user) {
             return ResponseHelper::error(
                 ResponseHelper::USERNAME_PASSWORD_INCORRECT,
-                ['Tài khoản và mật khẩu không đúng'],
+                ['Tài khoản hoặc mật khẩu không đúng'],
                 403
-            );            
+            );
         }
 
-        // get token
-        $token = md5($username + $password + time()) . '-' . base64_encode(time());
+        // update or create record device token
+        $token = UserModel::get_token($user, $device, $type_device);
 
-        // save token
+        if (!$token) { 
+            return ResponseHelper::error(
+                ResponseHelper::SERVER_ERROR,
+                ['Lỗi server'],
+                500
+            );
+        }
 
-        // $current_time = time();
-        // var_dump($date_start);
-        // return $date_start;
         $data = [
-            'username' => $username,
-            'password' => $password,
+            'id' => $user->id,
+            'email' => $user->email,
+            'name' => $user->name,
             'token' => $token,
         ];
 
-        // return ResponseHelper::success((object)$data, 200);
-        return ResponseHelper::error(ResponseHelper::NOT_FOUND, ['not found'], 400);
+        return ResponseHelper::success((object)$data, 200);
+        // return ResponseHelper::error(ResponseHelper::NOT_FOUND, ['not found'], 400);
     }
 }

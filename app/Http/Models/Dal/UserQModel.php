@@ -22,12 +22,20 @@ class UserQModel extends Model
     }
 
     /**
-     * get role user by id
+     * get user by username
      * @param $username
-     * @param $password (md5)
-     * @return array role user
+     * @return object|boolean : all properties from `users` table,
+     * returns false if no user is founded
      */
-    public static function get_user_by_username_password($username, $password) {
+    public static function get_user_by_username($username) {
+        $result = DB::table(Constants::USERS)
+            ->where('email', '=', $username)
+            ->get();
 
+        if (empty($result[0])) {
+            return FALSE;
+        }
+
+        return $result[0];
     }
 }
