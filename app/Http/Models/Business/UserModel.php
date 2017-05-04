@@ -36,7 +36,7 @@ class UserModel extends Authenticatable
      * @param $type_device
      * @return FALSE or token
      */
-    public static function get_token($user, $name_device = '', $type_device = '') {
+    public static function get_token($user, $name_device = null, $type_device = null) {
         // config token
         $token = md5($user->email . $user->password . time()) . '-' . base64_encode(time());
 
