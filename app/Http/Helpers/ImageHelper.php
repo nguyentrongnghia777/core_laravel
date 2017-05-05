@@ -38,7 +38,6 @@ Class ImageHelper {
         $filename = pathinfo($image_name, PATHINFO_FILENAME);
         $extension = "." . pathinfo($image_name, PATHINFO_EXTENSION);
         $image_name = ConvertStringHelper::convert_vn_to_str($filename) . "_" . time() . $extension;
-        
         return $image_name;
     }
 }
