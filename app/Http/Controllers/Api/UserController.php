@@ -45,6 +45,8 @@ class UserController extends Controller
             );
         }
 
+        // todo validate type device
+
         // check user login
         $user = UserModel::app_login($username, $password);
         if (!$user) {
@@ -74,6 +76,5 @@ class UserController extends Controller
         ];
 
         return ResponseHelper::success((object)$data, 200);
-        // return ResponseHelper::error(ResponseHelper::NOT_FOUND, ['not found'], 400);
     }
 }
