@@ -11,7 +11,7 @@ use App\Http\Models\Dal\BlogCModel;
 use App\Http\Models\Dal\BlogQModel;
 
 /**
- * Class BlogController
+ * Class ToolController
  * @package App\Http\Controllers\Api
  */
 class ToolController extends Controller

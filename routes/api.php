@@ -24,6 +24,10 @@ Route::group(['prefix' => 'v1','middleware' => 'auth:api'], function () {
     #adminlte_api_routes
 });
 
+Route::group(['prefix' => 'user'], function () {
+    Route::post('/login', 'Api\UserController@login');
+});
+
 Route::group(['prefix' => 'tools'], function () {
     Route::get('hello', function () {
         return 'hello';

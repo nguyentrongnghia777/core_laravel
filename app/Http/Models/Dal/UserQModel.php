@@ -20,4 +20,22 @@ class UserQModel extends Model
                 ->where('ug.user_id', '=', $id)
                 ->get();
     }
+
+    /**
+     * get user by username
+     * @param $username
+     * @return object|boolean : all properties from `users` table,
+     * returns false if no user is founded
+     */
+    public static function get_user_by_username($username) {
+        $result = DB::table(Constants::USERS)
+            ->where('email', '=', $username)
+            ->get();
+
+        if (empty($result[0])) {
+            return FALSE;
+        }
+
+        return $result[0];
+    }
 }

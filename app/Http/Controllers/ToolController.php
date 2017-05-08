@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests;
 use App\Http\Models\Business\PostModel;
 use App\Http\Helpers\Constant;
@@ -61,5 +62,13 @@ class ToolController extends Controller
         // Debugbar::measure('My long operation', function() {
         //     // Do something…
         // });
+    }
+
+    public function demo_hash_password() {
+        echo '<pre>';
+            // var_dump(Hash::make('123124'));
+            // var_dump(Hash::check('123123','$2y$10$QC7An67rk5GnQ6agyL0VxehEXsEfPRwjILWqW/tqO.5DVxlqKUaHO'));
+            var_dump(Hash::check('123123','$2y$10$Ygza8kBIBfGuwj6ywzlFTeKus6Smvhc/qJAmT00ZM4Z2q9mfaSmXi'));
+        echo '</pre>'; 
     }
 }

@@ -16,6 +16,7 @@ Route::get('/', 'HomeController@index');
 // Tools
 Route::get('/tool/demo', 'ToolController@index');
 Route::get('/tool/demo_paging', 'ToolController@demo_paging');
+Route::get('/tool/demo_hash_password', 'ToolController@demo_hash_password');
 
 // Blogs
 Route::group(['middleware' => ['auth']], function () {
