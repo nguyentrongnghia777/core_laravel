@@ -78,7 +78,8 @@ class CategoryController extends Controller
             'name' => $_POST['category-name'],
             'description' => $_POST['category-description']
         ];
-        
+
+        // Process insert
         if (CategoryCModel::insert_category($data)) {
             $request->session()->flash('alert-success', 'Thể loại đã được tạo thành công!');
             return back();
@@ -91,7 +92,7 @@ class CategoryController extends Controller
     /**
      * Edit a category.
      *
-     * @param id
+     * @param int $id
      * @return Response
      */
     public function edit($id) {
@@ -107,7 +108,7 @@ class CategoryController extends Controller
     /**
      * Update a category.
      *
-     * @param id
+     * @param int $id
      * @return Response
      */
     public function update($id, Request $request) {
@@ -123,11 +124,15 @@ class CategoryController extends Controller
             'description' => $_POST['category-description']
         ];
 
+        // Check if user input id error
+        if (!$id  || !is_numeric($id)) {
+            $request->session()->flash('alert-danger', 'Thể loại cập nhật không thành công!');
+            return back();
+        }
+
+        // Process update
         if (CategoryCModel::update_category($id, $data)) {
             $request->session()->flash('alert-success', 'Thể loại đã được cập nhật thành công!');
-            return back();
-        } else {
-            $request->session()->flash('alert-danger', 'Thể loại cập nhật không thành công!');
             return back();
         }
     }
@@ -135,17 +140,22 @@ class CategoryController extends Controller
     /**
      * Delete a category.
      *
-     * @param id
+     * @param int $id
      * @param Request $request
      * @return Response
      */
     public function delete($id, Request $request) {
-        if (CategoryCModel::delete_category($id)) {
-            $request->session()->flash('alert-success', 'Thể loại đã được xóa thành công!');
-            return back();
-        } else {
+
+        // Check if user input id error
+        if (!$id  || !is_numeric($id)) {
             $request->session()->flash('alert-danger', 'Thể loại xóa không thành công!');
             return back();
         }
+
+        // Process delete
+        if (CategoryCModel::delete_category($id)) {
+            $request->session()->flash('alert-success', 'Thể loại đã được xóa thành công!');
+            return back();
+        } 
     }
 }
