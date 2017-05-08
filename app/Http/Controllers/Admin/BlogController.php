@@ -140,6 +140,7 @@ class BlogController extends Controller
         // Create data_model to update to DB
         $data_model = [
             'name' => $_POST['blog-name'],
+            'content' => $_POST['blog-content']
         ];
 
         // Process upload image

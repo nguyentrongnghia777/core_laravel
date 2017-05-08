@@ -65,6 +65,8 @@
                             <label id="upload" exist-img="{{ $product->images }}">
                                 <input type="file" name="product-images">
                             </label>
+                            <img id="logo-img" onclick="document.getElementById('add-new-logo').click();" src="{{asset('uploads/'.$product->images)}}"/>
+                            <input type="file" style="display: none" id="add-new-logo" name="product-images" accept="image/*" onchange="addNewLogo(this)"/>
                         </div>
                         <div class="form-group">
                             <label>Mô tả sản phẩm</label>
