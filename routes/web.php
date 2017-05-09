@@ -42,17 +42,17 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/edit/{id}', 'Admin\CategoryController@edit');
             Route::post('/update/{id}', 'Admin\CategoryController@update');
             Route::get('/delete/{id}', 'Admin\CategoryController@delete');
-            Route::post('/search', 'Admin\CategoryController@search');
         });
 
         // Products
         Route::group(['prefix' => 'product'], function () {
             Route::get('/', 'Admin\ProductController@index');
+            Route::post('/', 'Admin\ProductController@index');
             Route::get('/create', 'Admin\ProductController@create');
             Route::post('/store', 'Admin\ProductController@store');
             Route::get('/edit/{id}', 'Admin\ProductController@edit');
-             Route::post('/update/{id}', 'Admin\ProductController@update');
-             Route::get('/delete/{id}', 'Admin\ProductController@delete');
+            Route::post('/update/{id}', 'Admin\ProductController@update');
+            Route::get('/delete/{id}', 'Admin\ProductController@delete');
         });
     });
 });

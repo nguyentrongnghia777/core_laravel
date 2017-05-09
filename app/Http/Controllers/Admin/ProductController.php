@@ -101,8 +101,6 @@ class ProductController extends Controller
             'quantity' => $_POST['product-quantity'],
             'images' => Constants::URL_IMAGE_PRODUCT . $product_image_name
         ];
-
-        // input::file('product-images')->move('uploads/',input::file('product-images')->getClientOriginalName());
         
         if (ProductCModel::insert_product($data)) {
             //Move file to server
@@ -138,6 +136,11 @@ class ProductController extends Controller
      * @return Response
      */
     public function update($product_id, Request $request) {
+        // Check if user input id error
+        if (!$product_id  || !is_numeric($product_id)) {
+            $request->session()->flash('alert-danger', 'Sản phẩm cập nhật không thành công!');
+            return back();
+        }
 
         //Validate and store the products...
         $this->validate($request, [
@@ -149,12 +152,6 @@ class ProductController extends Controller
 
         // Get product
         $product = ProductQModel::get_product_by_id($product_id);
-
-        // check product == FALSE
-        if (!$product) {
-            $request->session()->flash('alert-danger', 'Sản phẩm cập nhật không thành công!');
-            return back();
-        }
 
         // Create data_model to update to DB
         $data_model = [
@@ -178,7 +175,7 @@ class ProductController extends Controller
             $data_model['images'] = Constants::URL_IMAGE_PRODUCT . $new_product_image_name;
         }
         
-        // Update data
+        // Process update product
         if (ProductCModel::update_product($product_id, $data_model)) {
             if ($image_uploaded == TRUE) {
                 //upload new image
@@ -188,9 +185,6 @@ class ProductController extends Controller
             }
 
             $request->session()->flash('alert-success', 'Sản phẩm đã được cập nhật thành công!');
-            return back();
-        } else {
-            $request->session()->flash('alert-danger', 'Sản phẩm sửa không thành công!');
             return back();
         } 
     }
@@ -203,25 +197,25 @@ class ProductController extends Controller
      * @return Response
      */
     public function delete($product_id, Request $request) {
-        // Get product
-        $product = ProductQModel::get_product_by_id($product_id);
 
-        // check product = FALSE
-        if (!$product) {
+        // Check if user input id error
+        if (!$product_id  || !is_numeric($product_id)) {
             $request->session()->flash('alert-danger', 'Sản phẩm xóa không thành công!');
             return back();
         }
 
+        // Get product
+        $product = ProductQModel::get_product_by_id($product_id);
+        // Get current image
         $old_image_url = $product->images;
+
+        // process delete product
         if (ProductCModel::delete_product($product_id)) {
             //delete old image.
             ImageHelper::delete_image($old_image_url);
 
             $request->session()->flash('alert-success', 'Sản phẩm đã được xóa thành công!');
             return back();
-        } else {
-            $request->session()->flash('alert-danger', 'Sản phẩm xóa không thành công!');
-            return back();
-        }
+        } 
     }
 }

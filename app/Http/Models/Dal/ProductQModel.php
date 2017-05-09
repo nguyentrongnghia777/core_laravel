@@ -31,7 +31,7 @@ class ProductQModel extends Model
      */
     public static function get_products_paging($search) {
         return DB::table(Constants::PRODUCTS)
-                ->where('name', 'like', $search.'%') 
+                ->where('name', 'like', '%'.$search.'%') 
                 ->orderBy('id', 'desc')
                 ->paginate(Constants::ADMIN_DEFAULT_PAGING);
     }  
